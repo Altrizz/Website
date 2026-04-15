@@ -1,48 +1,90 @@
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-md border-b border-white/10 h-20 flex items-center">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 w-full">
-        <div className="flex justify-between items-center">
-          <Logo />
-          
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#services" className="text-sm font-medium text-muted hover:text-white transition-colors">Solutions</a>
-            <a href="#work" className="text-sm font-medium text-muted hover:text-white transition-colors">Work</a>
-            <a href="#about" className="text-sm font-medium text-muted hover:text-white transition-colors">Agency</a>
-            <Button className="cta-button">
+    <nav className={`fixed top-0 left-0 right-0 z-[90] transition-all duration-500 ${
+      scrolled ? "bg-bg/80 backdrop-blur-xl border-b border-white/10 py-4" : "bg-transparent py-8"
+    }`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 flex justify-between items-center w-full">
+        <Logo />
+        
+        <div className="hidden md:flex items-center gap-12">
+          {[
+            { name: 'Solutions', href: '#services' },
+            { name: 'Work', href: '#work' },
+            { name: 'Agency', href: '#about' }
+          ].map((item) => (
+            <a 
+              key={item.name}
+              href={item.href} 
+              className="text-[10px] font-black uppercase tracking-[0.3em] text-muted hover:text-white transition-colors relative group"
+            >
+              {item.name}
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent group-hover:w-full transition-all duration-300" />
+            </a>
+          ))}
+          <motion.div
+            whileHover={{ x: -2, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <Button className="cta-button btn-glitch">
               Start a Project
             </Button>
-          </div>
-
-          <div className="md:hidden flex items-center">
-            <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-white">
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          </motion.div>
         </div>
+
+        <button 
+          className="md:hidden text-white p-2"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden absolute top-20 left-0 right-0 bg-surface border-b border-white/10 px-4 py-6 space-y-4"
-        >
-          <a href="#services" className="block text-lg font-medium text-white">Services</a>
-          <a href="#work" className="block text-lg font-medium text-white">Work</a>
-          <a href="#about" className="block text-lg font-medium text-white">About</a>
-          <Button className="w-full cta-button">Start a Project</Button>
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-full left-0 right-0 bg-surface border-b border-white/10 p-8 md:hidden flex flex-col gap-8 shadow-2xl z-[100]"
+          >
+            {[
+              { name: 'Solutions', href: '#services' },
+              { name: 'Work', href: '#work' },
+              { name: 'Agency', href: '#about' }
+            ].map((item) => (
+              <a 
+                key={item.name}
+                href={item.href} 
+                className="text-2xl font-black uppercase tracking-tighter text-white"
+                onClick={() => setIsOpen(false)}
+              >
+                {item.name}
+              </a>
+            ))}
+            <motion.div
+              whileTap={{ scale: 0.98 }}
+            >
+              <Button className="w-full cta-button btn-glitch">Start a Project</Button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

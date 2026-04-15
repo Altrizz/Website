@@ -59,7 +59,7 @@ export default function AIConsultant() {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-8 right-8 w-16 h-16 rounded-full shadow-2xl z-50 group bg-white text-black hover:bg-accent hover:text-white transition-all hover:scale-110 border border-white/10"
+        className="fixed bottom-8 right-8 w-16 h-16 rounded-none shadow-2xl z-50 group bg-white text-black hover:bg-accent hover:text-white transition-all hover:scale-110 border border-white/10 btn-glitch"
       >
         <MessageSquare className="w-8 h-8 group-hover:rotate-12 transition-transform" />
       </Button>
@@ -70,7 +70,7 @@ export default function AIConsultant() {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed bottom-28 right-8 w-[380px] h-[520px] bg-surface rounded-2xl z-50 flex flex-col overflow-hidden shadow-2xl border border-white/10"
+            className="fixed bottom-28 right-8 w-[380px] h-[520px] bg-surface rounded-none z-50 flex flex-col overflow-hidden shadow-2xl border border-white/10"
           >
             <div className="p-6 border-b border-white/10 flex justify-between items-center bg-white/5">
               <div className="flex items-center gap-3">
@@ -94,7 +94,7 @@ export default function AIConsultant() {
               <div className="space-y-6">
                 {messages.map((m, i) => (
                   <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
-                    <div className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed ${
+                    <div className={`max-w-[85%] p-4 rounded-none text-sm leading-relaxed ${
                       m.role === "user" 
                         ? "bg-accent text-white shadow-md shadow-accent/10" 
                         : "bg-white/5 text-white border border-white/10"
@@ -105,7 +105,7 @@ export default function AIConsultant() {
                 ))}
                 {isLoading && (
                   <div className="flex justify-start">
-                    <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
+                    <div className="bg-white/5 p-4 rounded-none border border-white/10">
                       <Loader2 className="w-4 h-4 text-accent animate-spin" />
                     </div>
                   </div>
@@ -122,9 +122,9 @@ export default function AIConsultant() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask about our services..."
-                  className="rounded-xl border-white/10 bg-white/5 text-white focus-visible:ring-accent h-12"
+                  className="rounded-none border-white/10 bg-white/5 text-white focus-visible:ring-accent h-12"
                 />
-                <Button type="submit" size="icon" className="rounded-xl bg-white text-black hover:bg-accent hover:text-white shrink-0 w-12 h-12">
+                <Button type="submit" size="icon" className="rounded-none bg-white text-black hover:bg-accent hover:text-white shrink-0 w-12 h-12 btn-glitch">
                   <Send className="w-5 h-5" />
                 </Button>
               </form>
