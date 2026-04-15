@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-bg">
+    <section className="relative min-h-[80vh] flex items-center pt-20 overflow-hidden bg-bg">
       {/* Background Text Accent */}
       <motion.div 
         initial={{ opacity: 0, x: 100 }}

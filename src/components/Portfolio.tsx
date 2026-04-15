@@ -34,7 +34,7 @@ const projects = [
 
 export default function Portfolio() {
   return (
-    <section id="work" className="py-16 md:py-32 bg-bg text-white overflow-hidden relative">
+    <section id="work" className="py-12 md:py-20 bg-bg text-white overflow-hidden relative">
       {/* Background Text Accent */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 text-[15vw] font-black text-white/[0.01] leading-none pointer-events-none select-none -rotate-90 origin-left">
         PORTFOLIO

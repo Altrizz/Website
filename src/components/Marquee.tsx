@@ -11,7 +11,7 @@ export default function Marquee({ text, reverse = false, speed = 30 }: MarqueePr
   const items = [...text, ...text, ...text, ...text, ...text, ...text];
 
   return (
-    <div className="relative flex overflow-x-hidden bg-accent py-10 md:py-16 border-y border-white/10 my-8 md:my-16">
+    <div className="relative flex overflow-x-hidden bg-accent py-6 md:py-10 border-y border-white/10 my-4 md:my-8">
       <motion.div
         animate={{
           x: reverse ? ["-33.33%", "0%"] : ["0%", "-33.33%"],

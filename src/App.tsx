@@ -7,6 +7,7 @@ import AIConsultant from "@/src/components/AIConsultant";
 import Cursor from "@/src/components/Cursor";
 import Marquee from "@/src/components/Marquee";
 import Process from "@/src/components/Process";
+import InteractiveBackground from "@/src/components/InteractiveBackground";
 import { Logo } from "@/src/components/Logo";
 import { ArrowUpRight, Instagram, Twitter, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 
@@ -21,6 +22,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-bg relative selection:bg-pink selection:text-white">
       <Cursor />
+      <InteractiveBackground />
       
       {/* Grain Overlay */}
       <div className="grain-overlay" />
@@ -30,26 +32,6 @@ export default function App() {
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent to-pink z-[100] origin-left"
         style={{ scaleX }}
       />
-
-      {/* Background Decorative Elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <motion.div 
-          animate={{ 
-            x: [0, 100, 0],
-            y: [0, 50, 0],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-accent/5 rounded-full blur-[120px]" 
-        />
-        <motion.div 
-          animate={{ 
-            x: [0, -100, 0],
-            y: [0, -50, 0],
-          }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-pink/5 rounded-full blur-[150px]" 
-        />
-      </div>
 
       <div className="relative z-10">
         <Navbar />
@@ -65,7 +47,7 @@ export default function App() {
           <Portfolio />
           
           {/* About / CTA Section */}
-          <section id="about" className="py-16 md:py-32 bg-bg relative overflow-hidden">
+          <section id="about" className="py-12 md:py-24 bg-bg relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <motion.div
@@ -130,7 +112,7 @@ export default function App() {
           </section>
 
           {/* Final CTA Section */}
-          <section className="py-16 md:py-32 bg-bg text-white relative overflow-hidden">
+          <section className="py-12 md:py-24 bg-bg text-white relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 relative z-10">
               <div className="text-center max-w-4xl mx-auto">
                 <h2 className="text-massive text-white mb-12 uppercase">READY TO DEFINE THE FUTURE?</h2>
@@ -151,7 +133,7 @@ export default function App() {
           </section>
 
           {/* Footer */}
-          <footer className="bg-bg border-t border-white/10 pt-32 pb-12 relative overflow-hidden">
+          <footer className="bg-bg border-t border-white/10 pt-20 pb-12 relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 mb-32">
                 <div className="lg:col-span-5">
