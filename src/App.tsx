@@ -4,7 +4,11 @@ import Hero from "@/src/components/Hero";
 import Services from "@/src/components/Services";
 import Portfolio from "@/src/components/Portfolio";
 import AIConsultant from "@/src/components/AIConsultant";
+import Cursor from "@/src/components/Cursor";
+import Marquee from "@/src/components/Marquee";
+import Process from "@/src/components/Process";
 import { Logo } from "@/src/components/Logo";
+import { ArrowUpRight, Instagram, Twitter, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 
 export default function App() {
   const { scrollYProgress } = useScroll();
@@ -16,6 +20,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-bg relative selection:bg-pink selection:text-white">
+      <Cursor />
+      
       {/* Grain Overlay */}
       <div className="grain-overlay" />
 
@@ -50,17 +56,16 @@ export default function App() {
         <main>
           <Hero />
           
+          <Marquee text={["Strategy", "Design", "AI", "Scale", "Precision", "Growth"]} />
+
           <Services />
           
-          {/* Transition Accent */}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
-            <div className="accent-line" />
-          </div>
+          <Process />
 
           <Portfolio />
           
           {/* About / CTA Section */}
-          <section id="about" className="py-32 bg-bg relative overflow-hidden">
+          <section id="about" className="py-16 md:py-32 bg-bg relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <motion.div
@@ -79,21 +84,21 @@ export default function App() {
                   </p>
                   <div className="space-y-8">
                     <div className="flex items-center gap-6 group">
-                      <div className="w-12 h-12 rounded-none bg-white text-black flex items-center justify-center font-bold shadow-md group-hover:bg-accent group-hover:text-white transition-colors">1</div>
+                      <div className="w-12 h-12 rounded-xl bg-white text-black flex items-center justify-center font-bold shadow-md group-hover:bg-accent group-hover:text-white transition-colors">1</div>
                       <div>
                         <p className="font-bold text-lg text-white">Strategic Consultation</p>
                         <p className="text-sm text-muted">Deep dive into your business goals.</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-6 group">
-                      <div className="w-12 h-12 rounded-none bg-white text-black flex items-center justify-center font-bold shadow-md group-hover:bg-pink group-hover:text-white transition-colors">2</div>
+                      <div className="w-12 h-12 rounded-xl bg-white text-black flex items-center justify-center font-bold shadow-md group-hover:bg-pink group-hover:text-white transition-colors">2</div>
                       <div>
                         <p className="font-bold text-lg text-white">Creative Execution</p>
                         <p className="text-sm text-muted">Bringing vision to life with precision.</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-6 group">
-                      <div className="w-12 h-12 rounded-none bg-white text-black flex items-center justify-center font-bold shadow-md group-hover:bg-accent group-hover:text-white transition-colors">3</div>
+                      <div className="w-12 h-12 rounded-xl bg-white text-black flex items-center justify-center font-bold shadow-md group-hover:bg-accent group-hover:text-white transition-colors">3</div>
                       <div>
                         <p className="font-bold text-lg text-white">Continuous Optimization</p>
                         <p className="text-sm text-muted">Data-driven growth and refinement.</p>
@@ -102,7 +107,7 @@ export default function App() {
                   </div>
                 </motion.div>
                 <div className="relative z-10">
-                  <div className="aspect-square bg-surface rounded-none overflow-hidden shadow-2xl border border-white/10 group">
+                  <div className="aspect-square bg-surface rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
                     <img 
                       src="https://picsum.photos/seed/agency/1000/1000" 
                       alt="Agency Life" 
@@ -114,7 +119,7 @@ export default function App() {
                   <motion.div 
                     animate={{ y: [0, -20, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute -bottom-10 -left-10 p-8 bg-surface rounded-none shadow-2xl border border-white/10 backdrop-blur-xl"
+                    className="absolute -bottom-10 -left-10 p-8 bg-surface rounded-2xl shadow-2xl border border-white/10 backdrop-blur-xl"
                   >
                     <p className="text-4xl font-extrabold tracking-tighter mb-2 text-pink">150%</p>
                     <p className="text-[10px] text-muted font-black uppercase tracking-widest">Avg Annual Growth</p>
@@ -125,66 +130,113 @@ export default function App() {
           </section>
 
           {/* Final CTA Section */}
-          <section className="py-32 bg-white text-black relative overflow-hidden">
+          <section className="py-16 md:py-32 bg-bg text-white relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 relative z-10">
               <div className="text-center max-w-4xl mx-auto">
-                <h2 className="text-massive text-black mb-12">READY TO DEFINE THE FUTURE?</h2>
+                <h2 className="text-massive text-white mb-12 uppercase">READY TO DEFINE THE FUTURE?</h2>
                 <div className="flex flex-wrap justify-center gap-8">
                   <button className="cta-button">
                     Start Your Project
                   </button>
-                  <button className="cta-button-outline !border-black !text-black hover:!bg-black hover:!text-white">
+                  <button className="cta-button-outline">
                     View Our Work
                   </button>
                 </div>
               </div>
             </div>
             {/* Background Text Accent */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-black text-black/[0.03] whitespace-nowrap pointer-events-none">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-black text-white/[0.02] whitespace-nowrap pointer-events-none">
               AURA DIGITAL
             </div>
           </section>
 
           {/* Footer */}
-          <footer className="py-24 bg-bg border-t border-white/10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
-              <div className="flex flex-col md:flex-row justify-between items-start gap-16">
-                <div className="max-w-xs">
-                  <div className="flex items-center gap-2 mb-6">
-                    <Logo />
-                  </div>
-                  <p className="text-muted text-sm leading-relaxed">
-                    The future of marketing is digital. We are the architects of digital excellence.
+          <footer className="bg-bg border-t border-white/10 pt-32 pb-12 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 relative z-10">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 mb-32">
+                <div className="lg:col-span-5">
+                  <Logo />
+                  <p className="text-2xl font-bold text-white mt-12 mb-12 leading-tight tracking-tighter">
+                    WE ARE THE ARCHITECTS OF <br />
+                    <span className="text-accent">DIGITAL EXCELLENCE</span>.
                   </p>
+                  <div className="flex gap-6">
+                    {[Instagram, Twitter, Linkedin].map((Icon, i) => (
+                      <motion.a 
+                        key={i}
+                        href="#" 
+                        whileHover={{ y: -5, color: "var(--color-accent)" }}
+                        className="w-12 h-12 border border-white/10 rounded-xl flex items-center justify-center text-muted transition-colors"
+                      >
+                        <Icon className="w-5 h-5" />
+                      </motion.a>
+                    ))}
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-16">
+
+                <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-12">
                   <div>
-                    <h4 className="font-bold mb-6 uppercase text-[10px] tracking-[0.2em] text-white">Social</h4>
-                    <ul className="space-y-3 text-sm text-muted">
-                      <li><a href="#" className="hover:text-accent transition-colors">Twitter</a></li>
-                      <li><a href="#" className="hover:text-accent transition-colors">LinkedIn</a></li>
-                      <li><a href="#" className="hover:text-accent transition-colors">Instagram</a></li>
+                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-8">Navigation</h4>
+                    <ul className="space-y-4">
+                      {['Work', 'Services', 'Process', 'Agency', 'Contact'].map((item) => (
+                        <li key={item}>
+                          <a href={`#${item.toLowerCase()}`} className="text-muted hover:text-white transition-colors flex items-center gap-2 group">
+                            <span className="w-0 h-px bg-accent group-hover:w-4 transition-all" />
+                            {item}
+                          </a>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-bold mb-6 uppercase text-[10px] tracking-[0.2em] text-white">Legal</h4>
-                    <ul className="space-y-3 text-sm text-muted">
-                      <li><a href="#" className="hover:text-accent transition-colors">Privacy</a></li>
-                      <li><a href="#" className="hover:text-accent transition-colors">Terms</a></li>
+                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-pink mb-8">Contact</h4>
+                    <ul className="space-y-6">
+                      <li className="flex gap-4">
+                        <Mail className="w-5 h-5 text-pink shrink-0" />
+                        <span className="text-muted text-sm">hello@auradigital.com</span>
+                      </li>
+                      <li className="flex gap-4">
+                        <Phone className="w-5 h-5 text-pink shrink-0" />
+                        <span className="text-muted text-sm">+1 (555) 000-1234</span>
+                      </li>
+                      <li className="flex gap-4">
+                        <MapPin className="w-5 h-5 text-pink shrink-0" />
+                        <span className="text-muted text-sm">123 Digital Way,<br />San Francisco, CA</span>
+                      </li>
                     </ul>
                   </div>
                   <div className="col-span-2 sm:col-span-1">
-                    <h4 className="font-bold mb-6 uppercase text-[10px] tracking-[0.2em] text-white">Contact</h4>
-                    <p className="text-sm text-muted">hello@auradigital.com</p>
+                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-8">Newsletter</h4>
+                    <p className="text-muted text-xs mb-6 leading-relaxed">Get the latest insights on AI and design.</p>
+                    <div className="relative">
+                      <input 
+                        type="email" 
+                        placeholder="Email Address" 
+                        className="w-full bg-surface border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-accent transition-colors"
+                      />
+                      <button className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-accent rounded-lg flex items-center justify-center text-black hover:scale-110 transition-transform">
+                        <ArrowUpRight className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="mt-24 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em] text-muted font-bold">
-                <p>© 2024 Aura Digital Agency. All rights reserved.</p>
-                <p className="flex items-center gap-2">
-                  Built with <span className="text-pink">Aura AI</span>
+
+              <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div className="flex gap-8 text-[10px] font-black uppercase tracking-widest text-muted">
+                  <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+                  <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+                  <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+                </div>
+                <p className="text-[10px] font-black uppercase tracking-widest text-muted">
+                  © 2024 AURA DIGITAL. ALL RIGHTS RESERVED.
                 </p>
               </div>
+            </div>
+
+            {/* Background Accent */}
+            <div className="absolute bottom-0 right-0 text-[30vw] font-black text-white/[0.01] leading-none pointer-events-none translate-y-1/4">
+              AURA
             </div>
           </footer>
         </main>
@@ -194,3 +246,4 @@ export default function App() {
     </div>
   );
 }
+

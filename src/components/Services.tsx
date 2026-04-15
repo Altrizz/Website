@@ -48,7 +48,7 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-32 bg-bg relative overflow-hidden">
+    <section id="services" className="py-16 md:py-32 bg-bg relative overflow-hidden">
       {/* Background Text Accent */}
       <div className="absolute top-0 right-0 text-[15vw] font-black text-white/[0.02] leading-none pointer-events-none select-none translate-y-1/4">
         SERVICES
@@ -70,7 +70,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`group relative p-10 bg-surface border border-white/10 overflow-hidden ${
+              className={`group relative p-10 bg-surface border border-white/10 overflow-hidden rounded-3xl ${
                 service.size === "large" ? "md:col-span-2" : "md:col-span-1"
               }`}
             >

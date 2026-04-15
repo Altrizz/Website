@@ -34,7 +34,7 @@ const projects = [
 
 export default function Portfolio() {
   return (
-    <section id="work" className="py-32 bg-bg text-white overflow-hidden relative">
+    <section id="work" className="py-16 md:py-32 bg-bg text-white overflow-hidden relative">
       {/* Background Text Accent */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 text-[15vw] font-black text-white/[0.01] leading-none pointer-events-none select-none -rotate-90 origin-left">
         PORTFOLIO
@@ -52,14 +52,14 @@ export default function Portfolio() {
             <motion.div 
               whileHover={{ x: -4 }}
               whileTap={{ scale: 0.9 }}
-              className="w-14 h-14 border border-white/10 flex items-center justify-center hover:bg-accent hover:text-black transition-all cursor-pointer group"
+              className="w-14 h-14 border border-white/10 flex items-center justify-center hover:bg-accent hover:text-black transition-all cursor-pointer group rounded-2xl"
             >
               <ArrowLeft className="w-6 h-6" />
             </motion.div>
             <motion.div 
               whileHover={{ x: 4 }}
               whileTap={{ scale: 0.9 }}
-              className="w-14 h-14 border border-white/10 flex items-center justify-center hover:bg-pink hover:text-white transition-all cursor-pointer group"
+              className="w-14 h-14 border border-white/10 flex items-center justify-center hover:bg-pink hover:text-white transition-all cursor-pointer group rounded-2xl"
             >
               <ArrowRight className="w-6 h-6" />
             </motion.div>
@@ -76,7 +76,7 @@ export default function Portfolio() {
               transition={{ delay: index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="group cursor-pointer"
             >
-              <div className="relative aspect-[16/10] overflow-hidden rounded-none mb-8 shadow-2xl border border-white/5 bg-surface">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-3xl mb-8 shadow-2xl border border-white/5 bg-surface">
                 <img 
                   src={project.image} 
                   alt={project.title}
@@ -85,12 +85,12 @@ export default function Portfolio() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-bg/80 via-transparent to-transparent opacity-60 group-hover:opacity-0 transition-opacity duration-500" />
                 
-                <div className="absolute top-8 right-8 w-14 h-14 bg-white rounded-none flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 shadow-xl">
+                <div className="absolute top-8 right-8 w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 shadow-xl">
                   <ArrowUpRight className="w-7 h-7" />
                 </div>
 
                 <div className="absolute bottom-8 left-8 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                  <span className="px-4 py-2 bg-accent text-black text-[10px] font-black uppercase tracking-widest">
+                  <span className="px-4 py-2 bg-accent text-black text-[10px] font-black uppercase tracking-widest rounded-lg">
                     View Project
                   </span>
                 </div>

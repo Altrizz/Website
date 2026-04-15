@@ -57,29 +57,29 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1, duration: 1 }}
-              className="mt-20 flex gap-12"
+              className="mt-12 md:mt-16 flex flex-wrap gap-8 md:gap-16 items-center"
             >
-              <div>
-                <p className="text-3xl font-extrabold text-white tracking-tighter">50+</p>
+              <div className="flex flex-col">
+                <p className="text-4xl md:text-5xl font-extrabold text-white tracking-tighter -mb-1">50+</p>
                 <p className="text-[10px] text-muted font-black uppercase tracking-widest">Global Partners</p>
               </div>
-              <div className="w-px h-12 bg-white/10" />
-              <div>
-                <p className="text-3xl font-extrabold text-white tracking-tighter">12</p>
+              <div className="hidden sm:block w-px h-12 bg-white/10" />
+              <div className="flex flex-col">
+                <p className="text-4xl md:text-5xl font-extrabold text-white tracking-tighter -mb-1">12</p>
                 <p className="text-[10px] text-muted font-black uppercase tracking-widest">Design Awards</p>
               </div>
             </motion.div>
           </div>
 
-          <div className="lg:col-span-5 relative">
+          <div className="lg:col-span-5 relative mt-12 lg:mt-0">
             <motion.div
               initial={{ opacity: 0, scale: 0.9, rotate: 5 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative aspect-square"
+              className="relative aspect-square max-w-[450px] mx-auto lg:ml-auto"
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 to-pink/20 blur-3xl rounded-full" />
-              <div className="relative h-full w-full bg-surface border border-white/10 rounded-none overflow-hidden shadow-2xl group">
+              <div className="relative h-full w-full bg-surface border border-white/10 rounded-3xl overflow-hidden shadow-2xl group">
                 <img 
                   src="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&q=80&w=1200" 
                   alt="Digital Art" 
@@ -93,18 +93,18 @@ export default function Hero() {
               <motion.div 
                 animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-6 -right-6 w-24 h-24 bg-accent/20 backdrop-blur-xl border border-white/20 flex items-center justify-center"
+                className="absolute -top-4 -right-4 md:-top-8 md:-right-8 w-20 h-20 md:w-28 md:h-28 bg-accent/20 backdrop-blur-xl border border-white/20 flex items-center justify-center rounded-2xl shadow-2xl"
               >
-                <Zap className="text-accent w-8 h-8" />
+                <Zap className="text-accent w-8 h-8 md:w-10 md:h-10" />
               </motion.div>
               <motion.div 
                 animate={{ y: [0, 20, 0], rotate: [0, -10, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-6 -left-6 w-32 h-32 bg-pink/20 backdrop-blur-xl border border-white/20 flex items-center justify-center"
+                className="absolute -bottom-4 -left-4 md:-bottom-8 md:-left-8 w-28 h-28 md:w-36 md:h-36 bg-pink/20 backdrop-blur-xl border border-white/20 flex items-center justify-center rounded-2xl shadow-2xl"
               >
-                <div className="text-center">
-                  <p className="text-2xl font-black text-pink">AI</p>
-                  <p className="text-[8px] font-black uppercase tracking-widest text-white/60">Powered</p>
+                <div className="text-center flex flex-col gap-0.5">
+                  <p className="text-2xl md:text-3xl font-black text-pink leading-none">AI</p>
+                  <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-white/60">Powered</p>
                 </div>
               </motion.div>
             </motion.div>
