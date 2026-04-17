@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, AnimatePresence, useAnimation } from "motion/react";
-import { ArrowRight, Zap, Rocket } from "lucide-react";
+import { ArrowRight, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRef, useState, useEffect } from "react";
 
@@ -13,18 +13,43 @@ const AGENCY_WORDS = [
 ];
 
 const WORD_EFFECTS = [
-  { initial: { opacity: 0, scale: 0.5, filter: "blur(20px)" }, animate: { opacity: 1, scale: 1, filter: "blur(0px)" }, exit: { opacity: 0, scale: 1.5, filter: "blur(10px)" }, transition: { duration: 0.8, ease: "backOut" } },
-  { initial: { opacity: 0, x: 50, skewX: -20, filter: "blur(5px)" }, animate: { opacity: 1, x: 0, skewX: 0, filter: "blur(0px)" }, exit: { opacity: 0, x: -50, skewX: 20, filter: "blur(5px)" }, transition: { duration: 0.6, ease: "easeOut" } },
-  { initial: { opacity: 0, y: -40, filter: "brightness(2) blur(10px)" }, animate: { opacity: 1, y: 0, filter: "brightness(1) blur(0px)" }, exit: { opacity: 0, y: 40, filter: "brightness(0) blur(10px)" }, transition: { duration: 0.7, ease: "circOut" } },
-  { initial: { opacity: 0, rotate: -15, scale: 1.2 }, animate: { opacity: 1, rotate: 0, scale: 1 }, exit: { opacity: 0, rotate: 15, scale: 0.8 }, transition: { type: "spring", stiffness: 200, damping: 12 } },
-  { initial: { opacity: 0, letterSpacing: "0.5em", filter: "blur(10px)" }, animate: { opacity: 1, letterSpacing: "0em", filter: "blur(0px)" }, exit: { opacity: 0, letterSpacing: "-0.1em", filter: "blur(5px)" }, transition: { duration: 0.9, ease: "anticipate" } },
-  { initial: { opacity: 0, skewY: 10, y: 30 }, animate: { opacity: 1, skewY: 0, y: 0 }, exit: { opacity: 0, skewY: -10, y: -30 }, transition: { duration: 0.7, ease: "backOut" } }
+  { 
+    initial: { opacity: 0, scale: 0.8, filter: "blur(12px) brightness(2)" }, 
+    animate: { opacity: 1, scale: 1, filter: "blur(0px) brightness(1)" }, 
+    exit: { opacity: 0, scale: 1.1, filter: "blur(8px) brightness(0)" }, 
+    transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } 
+  },
+  { 
+    initial: { opacity: 0, x: 20, y: 10, filter: "blur(10px)", rotate: -2 }, 
+    animate: { opacity: 1, x: 0, y: 0, filter: "blur(0px)", rotate: 0 }, 
+    exit: { opacity: 0, x: -20, y: -10, filter: "blur(10px)", rotate: 2 }, 
+    transition: { duration: 0.8, ease: "easeInOut" } 
+  },
+  { 
+    initial: { opacity: 0, letterSpacing: "0.4em", scale: 0.9 }, 
+    animate: { opacity: 1, letterSpacing: "0em", scale: 1 }, 
+    exit: { opacity: 0, letterSpacing: "-0.1em", scale: 1.1 }, 
+    transition: { duration: 1.2, ease: "anticipate" } 
+  },
+  { 
+    initial: { opacity: 0, rotateX: 90, filter: "blur(4px)" }, 
+    animate: { opacity: 1, rotateX: 0, filter: "blur(0px)" }, 
+    exit: { opacity: 0, rotateX: -90, filter: "blur(4px)" }, 
+    transition: { duration: 0.7, ease: "circOut" } 
+  },
+  { 
+    initial: { opacity: 0, skewX: -20, x: -30 }, 
+    animate: { opacity: 1, skewX: 0, x: 0 }, 
+    exit: { opacity: 0, skewX: 20, x: 30 }, 
+    transition: { duration: 0.6, ease: "easeOut" } 
+  }
 ];
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [wordIdx, setWordIdx] = useState(0);
   const shakeControls = useAnimation();
+  const bgControls = useAnimation();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -37,9 +62,17 @@ export default function Hero() {
         transition: { duration: 0.5, ease: "easeInOut" }
       });
 
+      // Pulse background in sync
+      bgControls.start({
+        scale: [1, 1.15, 1],
+        opacity: [0.6, 0.9, 0.6],
+        filter: ["blur(48px)", "blur(32px)", "blur(48px)"],
+        transition: { duration: 0.8, ease: "easeOut" }
+      });
+
     }, 3000);
     return () => clearInterval(interval);
-  }, [shakeControls]);
+  }, [shakeControls, bgControls]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -76,7 +109,7 @@ export default function Hero() {
               
               <div className="relative">
 
-                <h1 className="text-massive mb-8 relative z-10 overflow-hidden">
+                <h1 className="text-massive mb-8 relative z-10 overflow-hidden text-white">
                   <motion.div 
                     initial={{ y: "100%" }}
                     animate={{ y: 0 }}
@@ -92,7 +125,7 @@ export default function Hero() {
                       animate={{ y: 0 }}
                       transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                       style={{ y: y2 }}
-                      className="text-accent block"
+                      className="text-white border-b-2 border-white/20 block"
                     >
                       FRONTERA
                     </motion.span>
@@ -140,7 +173,7 @@ export default function Hero() {
                   whileTap={{ scale: 0.98 }}
                 >
                   <Button className="cta-button btn-glitch group gap-2">
-                    Nuestro Proceso <Zap className="w-4 h-4 text-accent group-hover:scale-110 transition-transform" />
+                    Nuestro Proceso <Zap className="w-4 h-4 text-pink group-hover:scale-110 transition-transform" />
                   </Button>
                 </motion.div>
               </motion.div>
@@ -171,52 +204,52 @@ export default function Hero() {
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               className="relative aspect-square max-w-[450px] mx-auto lg:ml-auto"
             >
-              {/* Floating Letters Erupting from the Square into the Background */}
+              {/* Floating Background Particles (Dots merging with background) */}
               <div className="absolute inset-0 z-[-1] pointer-events-none flex items-center justify-center">
                 <AnimatePresence>
-                  {AGENCY_WORDS[wordIdx].split('').map((char, i) => {
-                    const totalChars = AGENCY_WORDS[wordIdx].length;
-                    // Spread in a full circle around the center
-                    const angle = (i / totalChars) * Math.PI * 2 + (Math.random() * 0.5);
-                    const distanceParams = [100, 250 + Math.random() * 150]; // Outward trajectory
-                    // Map distances to relative offsets
-                    const startX = Math.cos(angle) * 120;
-                    const startY = Math.sin(angle) * 120;
-                    const endX = Math.cos(angle) * distanceParams[1];
-                    const endY = Math.sin(angle) * distanceParams[1];
+                  {[...Array(12)].map((_, i) => {
+                    const angle = (i / 12) * Math.PI * 2 + (Math.random() * 0.5);
+                    const distance = 250 + Math.random() * 150;
+                    const startX = Math.cos(angle) * 100;
+                    const startY = Math.sin(angle) * 100;
+                    const endX = Math.cos(angle) * distance;
+                    const endY = Math.sin(angle) * distance;
 
                     return (
-                      <motion.span
-                        key={`erupt-${wordIdx}-${i}-${char}`}
-                        initial={{ opacity: 0, x: startX, y: startY, scale: 0.5, filter: "blur(0px)", z: 0 }}
+                      <motion.div
+                        key={`particle-${wordIdx}-${i}`}
+                        initial={{ opacity: 0, x: startX, y: startY, scale: 0 }}
                         animate={{
-                          opacity: [0, 0.8, 0],
+                          opacity: [0, 1, 0],
                           x: endX,
                           y: endY,
-                          scale: [0.5, 1.2, 0.2], // Grow out, then shrink back into deep space
-                          rotate: Math.random() * 360,
-                          filter: ["blur(0px)", "blur(2px)", "blur(15px)"], // Fade into background blur
+                          scale: [0, 1.5, 0],
+                          filter: ["blur(0px)", "blur(4px)", "blur(20px)"],
                         }}
                         transition={{
-                          duration: 3 + Math.random(),
+                          duration: 3 + Math.random() * 2,
                           ease: "easeOut",
-                          delay: Math.random() * 0.5 // Non-linear eruption
+                          delay: i * 0.05
                         }}
-                        className="absolute font-black text-2xl md:text-5xl mix-blend-screen drop-shadow-[0_0_15px_rgba(59,130,246,0.8)]"
-                        style={{ color: i % 2 === 0 ? "#3b82f6" : "#ff007f" }}
-                      >
-                        {char}
-                      </motion.span>
+                        className="absolute w-2 h-2 rounded-full bg-white/40 blur-[1px] mix-blend-screen"
+                      />
                     );
                   })}
                 </AnimatePresence>
               </div>
 
+              {/* Pulsing Background Glow */}
+              <motion.div 
+                animate={bgControls}
+                initial={{ opacity: 0.6, scale: 1, filter: "blur(48px)" }}
+                className="absolute inset-0 bg-gradient-to-tr from-white/10 to-pink/20 rounded-full z-[-2]" 
+              />
+              
               {/* Spinning background ambient glow */}
               <motion.div 
-                animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-                transition={{ rotate: { duration: 25, repeat: Infinity, ease: "linear" }, scale: { duration: 8, repeat: Infinity, ease: "easeInOut" } }}
-                className="absolute inset-0 bg-gradient-to-tr from-accent/30 to-pink/30 blur-3xl rounded-full opacity-60" 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 bg-gradient-to-tr from-white/5 to-pink/10 blur-3xl rounded-full opacity-40 z-[-3]" 
               />
               
               {/* THE LAVA LAMP DIAL: Abstract Fluid Animation */}
@@ -232,14 +265,14 @@ export default function Hero() {
                     initial={{ scale: 0.8, opacity: 0.7 }}
                     animate={{ scale: 1.6, opacity: 0 }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
-                    className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-tr from-accent/50 to-pink/50 blur-xl z-0 pointer-events-none mix-blend-screen"
+                    className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-tr from-white/20 to-pink/20 blur-xl z-0 pointer-events-none mix-blend-screen"
                   />
                   <motion.div
                     key={`pulse-ring-${wordIdx}`}
-                    initial={{ scale: 0.9, opacity: 1, borderWidth: '4px', borderColor: 'rgba(59,130,246,1)' }}
-                    animate={{ scale: 1.3, opacity: 0, borderWidth: '0px', borderColor: 'rgba(255,0,127,0)' }}
+                    initial={{ scale: 0.9, opacity: 1, borderWidth: '4px', borderColor: 'rgba(255,255,255,0.4)' }}
+                    animate={{ scale: 1.3, opacity: 0, borderWidth: '0px', borderColor: 'rgba(255,255,255,0)' }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="absolute inset-0 rounded-[2.5rem] shadow-[0_0_80px_rgba(59,130,246,0.8)] z-0 pointer-events-none"
+                    className="absolute inset-0 rounded-[2.5rem] shadow-[0_0_80px_rgba(255,255,255,0.2)] z-0 pointer-events-none"
                   />
                 </AnimatePresence>
 
@@ -257,7 +290,7 @@ export default function Hero() {
                       rotate: [0, 90, 0],
                     }}
                     transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-0 left-0 w-[120%] h-[120%] bg-accent/60 blur-[60px] rounded-full mix-blend-screen z-0"
+                    className="absolute top-0 left-0 w-[120%] h-[120%] bg-white/10 blur-[60px] rounded-full mix-blend-screen z-0"
                   />
                   <motion.div
                     animate={{
@@ -267,7 +300,7 @@ export default function Hero() {
                       rotate: [0, -90, 0],
                     }}
                     transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute bottom-0 right-0 w-[120%] h-[120%] bg-pink/60 blur-[60px] rounded-[40%] mix-blend-screen z-0"
+                    className="absolute bottom-0 right-0 w-[120%] h-[120%] bg-pink/20 blur-[60px] rounded-[40%] mix-blend-screen z-0"
                   />
                   <motion.div
                     animate={{
@@ -276,37 +309,34 @@ export default function Hero() {
                       scale: [0.8, 1.4, 0.8],
                     }}
                     transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-1/4 left-1/4 w-[100%] h-[100%] bg-violet-600/50 blur-[50px] rounded-full mix-blend-screen z-0 group-hover:bg-white/20 transition-colors duration-1000"
+                    className="absolute top-1/4 left-1/4 w-[100%] h-[100%] bg-white/5 blur-[50px] rounded-full mix-blend-screen z-0 group-hover:bg-white/10 transition-colors duration-1000"
                   />
 
                   {/* GLASS REFRACTION OVERLAY */}
                   <div className="absolute inset-0 backdrop-blur-[4px] bg-white/5 z-10" />
 
                   {/* RANDOM EFFECT WORDS WITH BLOCKY Inner Wave */}
-                  <div className="absolute inset-0 z-20 flex items-center justify-center overflow-hidden overflow-clip">
-                    <AnimatePresence mode="popLayout">
+                  <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+                    <AnimatePresence mode="wait">
                       <motion.div
                         key={wordIdx}
                         initial={WORD_EFFECTS[wordIdx % WORD_EFFECTS.length].initial}
                         animate={WORD_EFFECTS[wordIdx % WORD_EFFECTS.length].animate}
                         exit={WORD_EFFECTS[wordIdx % WORD_EFFECTS.length].exit}
-                        transition={WORD_EFFECTS[wordIdx % WORD_EFFECTS.length].transition as any}
-                        className="absolute text-5xl md:text-6xl font-black whitespace-nowrap"
+                        transition={WORD_EFFECTS[wordIdx % WORD_EFFECTS.length].transition}
+                        className="text-5xl md:text-6xl font-black whitespace-nowrap"
                       >
-                        <div className="relative group">
-                          {/* Blocky Chromatic Drop Shadow layers mapped behind text */}
-                          <span className="absolute inset-0 text-pink translate-x-[4px] translate-y-[4px] opacity-80 z-0 select-none mix-blend-screen">
-                            {AGENCY_WORDS[wordIdx]}
-                          </span>
-                          <span className="absolute inset-0 text-accent -translate-x-[4px] -translate-y-[4px] opacity-80 z-0 select-none mix-blend-screen">
+                        <div className="relative">
+                          {/* Ghost Layer for Soft Glow */}
+                          <span className="absolute inset-0 text-white opacity-20 blur-[2px] select-none">
                             {AGENCY_WORDS[wordIdx]}
                           </span>
                           
                           {/* Inner Animated Wave Text layer */}
                           <motion.span
                             animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-                            transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
-                            className="relative z-10 bg-gradient-to-r from-white via-pink to-white bg-[length:300%_auto] text-transparent bg-clip-text select-none block"
+                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                            className="relative z-10 bg-gradient-to-r from-white via-white/80 to-white bg-[length:200%_auto] text-transparent bg-clip-text select-none block"
                           >
                             {AGENCY_WORDS[wordIdx]}
                           </motion.span>
