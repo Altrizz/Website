@@ -1,10 +1,37 @@
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
 import { ArrowRight, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+
+const AGENCY_WORDS = [
+  "STRATEGY",
+  "DESIGN",
+  "CODE",
+  "LAUNCH",
+  "INNOVATE",
+  "AURA"
+];
+
+const WORD_EFFECTS = [
+  { initial: { opacity: 0, scale: 0.5, filter: "blur(20px)" }, animate: { opacity: 1, scale: 1, filter: "blur(0px)" }, exit: { opacity: 0, scale: 1.5, filter: "blur(10px)" }, transition: { duration: 0.8, ease: "backOut" } },
+  { initial: { opacity: 0, x: 50, skewX: -20, filter: "blur(5px)" }, animate: { opacity: 1, x: 0, skewX: 0, filter: "blur(0px)" }, exit: { opacity: 0, x: -50, skewX: 20, filter: "blur(5px)" }, transition: { duration: 0.6, ease: "easeOut" } },
+  { initial: { opacity: 0, y: -40, filter: "brightness(2) blur(10px)" }, animate: { opacity: 1, y: 0, filter: "brightness(1) blur(0px)" }, exit: { opacity: 0, y: 40, filter: "brightness(0) blur(10px)" }, transition: { duration: 0.7, ease: "circOut" } },
+  { initial: { opacity: 0, rotate: -15, scale: 1.2 }, animate: { opacity: 1, rotate: 0, scale: 1 }, exit: { opacity: 0, rotate: 15, scale: 0.8 }, transition: { type: "spring", stiffness: 200, damping: 12 } },
+  { initial: { opacity: 0, letterSpacing: "0.5em", filter: "blur(10px)" }, animate: { opacity: 1, letterSpacing: "0em", filter: "blur(0px)" }, exit: { opacity: 0, letterSpacing: "-0.1em", filter: "blur(5px)" }, transition: { duration: 0.9, ease: "anticipate" } },
+  { initial: { opacity: 0, skewY: 10, y: 30 }, animate: { opacity: 1, skewY: 0, y: 0 }, exit: { opacity: 0, skewY: -10, y: -30 }, transition: { duration: 0.7, ease: "backOut" } }
+];
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [wordIdx, setWordIdx] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIdx((prev) => (prev + 1) % AGENCY_WORDS.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
@@ -16,7 +43,7 @@ export default function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <section ref={containerRef} className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
+    <section ref={containerRef} className="relative min-h-screen flex items-center pt-32 pb-32 overflow-hidden">
       {/* Background Text Accent */}
       <motion.div 
         initial={{ opacity: 0, x: 100 }}
@@ -132,32 +159,116 @@ export default function Hero() {
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               className="relative aspect-square max-w-[450px] mx-auto lg:ml-auto"
             >
-              <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 to-pink/20 blur-3xl rounded-full" />
-              <div className="relative h-full w-full bg-surface border border-white/10 rounded-3xl overflow-hidden shadow-2xl group">
-                <img 
-                  src="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&q=80&w=1200" 
-                  alt="Digital Art" 
-                  className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-1000"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent" />
-              </div>
+              {/* Spinning background ambient glow */}
+              <motion.div 
+                animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+                transition={{ rotate: { duration: 25, repeat: Infinity, ease: "linear" }, scale: { duration: 8, repeat: Infinity, ease: "easeInOut" } }}
+                className="absolute inset-0 bg-gradient-to-tr from-accent/30 to-pink/30 blur-3xl rounded-full opacity-60" 
+              />
+              
+              {/* THE LAVA LAMP DIAL: Abstract Fluid Animation */}
+              <motion.div 
+                animate={{ y: [-10, 10, -10], x: [0, -5, 0] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                className="relative h-full w-full rounded-[2.5rem] shadow-2xl group"
+              >
+                {/* Backwards Impact Pulse */}
+                <AnimatePresence mode="popLayout">
+                  <motion.div
+                    key={`pulse-${wordIdx}`}
+                    initial={{ scale: 0.9, opacity: 0.8, borderWidth: '2px' }}
+                    animate={{ scale: 1.25, opacity: 0, borderWidth: '0px' }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
+                    className="absolute inset-0 rounded-[2.5rem] border-accent shadow-[0_0_40px_rgba(59,130,246,0.6)] z-0 pointer-events-none mix-blend-screen"
+                  />
+                </AnimatePresence>
+
+                {/* Inner Jitter Shake */}
+                <motion.div
+                  key={`shake-${wordIdx}`}
+                  animate={{ scale: [1, 0.96, 1.02, 1], rotate: [0, -1, 1, 0] }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="relative h-full w-full bg-[#05050a] border border-white/10 rounded-[2.5rem] flex items-center justify-center overflow-hidden"
+                >
+                  {/* LAVA BLOBS (Fluid Gradients) */}
+                  <motion.div
+                    animate={{
+                      y: ["-20%", "60%", "-20%"],
+                      x: ["-10%", "40%", "-10%"],
+                      scale: [1, 1.5, 1],
+                      rotate: [0, 90, 0],
+                    }}
+                    transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-0 left-0 w-[120%] h-[120%] bg-accent/60 blur-[60px] rounded-full mix-blend-screen z-0"
+                  />
+                  <motion.div
+                    animate={{
+                      y: ["60%", "-20%", "60%"],
+                      x: ["40%", "-10%", "40%"],
+                      scale: [1.2, 1, 1.2],
+                      rotate: [0, -90, 0],
+                    }}
+                    transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute bottom-0 right-0 w-[120%] h-[120%] bg-pink/60 blur-[60px] rounded-[40%] mix-blend-screen z-0"
+                  />
+                  <motion.div
+                    animate={{
+                      y: ["20%", "50%", "20%"],
+                      x: ["20%", "50%", "20%"],
+                      scale: [0.8, 1.4, 0.8],
+                    }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-1/4 left-1/4 w-[100%] h-[100%] bg-violet-600/50 blur-[50px] rounded-full mix-blend-screen z-0 group-hover:bg-white/20 transition-colors duration-1000"
+                  />
+
+                  {/* GLASS REFRACTION OVERLAY */}
+                  <div className="absolute inset-0 backdrop-blur-[4px] bg-white/5 z-10" />
+
+                  {/* RANDOM EFFECT WORDS */}
+                  <div className="absolute inset-0 z-20 flex items-center justify-center overflow-hidden overflow-clip">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={wordIdx}
+                        initial={WORD_EFFECTS[wordIdx % WORD_EFFECTS.length].initial}
+                        animate={WORD_EFFECTS[wordIdx % WORD_EFFECTS.length].animate}
+                        exit={WORD_EFFECTS[wordIdx % WORD_EFFECTS.length].exit}
+                        transition={WORD_EFFECTS[wordIdx % WORD_EFFECTS.length].transition as any}
+                        className="absolute text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white whitespace-nowrap drop-shadow-2xl"
+                      >
+                        {AGENCY_WORDS[wordIdx]}
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-transparent to-transparent opacity-60 pointer-events-none z-30" />
+                  <div className="absolute inset-0 border border-white/5 rounded-[2.5rem] pointer-events-none group-hover:border-white/20 transition-colors duration-700 z-30" />
+                </motion.div>
+              </motion.div>
 
               {/* Floating Artifacts */}
               <motion.div 
-                animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-4 -right-4 md:-top-8 md:-right-8 w-20 h-20 md:w-28 md:h-28 bg-accent/20 backdrop-blur-xl border border-white/20 flex items-center justify-center rounded-2xl shadow-2xl"
+                animate={{ y: [-15, 15, -15], x: [-5, 10, -5], rotate: [-5, 15, -5] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-4 -right-4 md:-top-8 md:-right-8 w-20 h-20 md:w-28 md:h-28 bg-surface/40 backdrop-blur-2xl border border-white/10 flex items-center justify-center rounded-3xl shadow-[0_0_40px_rgba(59,130,246,0.15)] group cursor-pointer hover:border-accent/50 hover:bg-surface/80 transition-all duration-500 z-20"
               >
-                <Zap className="text-accent w-8 h-8 md:w-10 md:h-10" />
+                <motion.div animate={{ rotate: 360 }} transition={{ duration: 12, repeat: Infinity, ease: "linear" }}>
+                  <Zap className="text-accent w-8 h-8 md:w-10 md:h-10 drop-shadow-[0_0_15px_rgba(59,130,246,0.3)] group-hover:scale-110 transition-transform duration-500" />
+                </motion.div>
               </motion.div>
+              
               <motion.div 
-                animate={{ y: [0, 20, 0], rotate: [0, -10, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-4 -left-4 md:-bottom-8 md:-left-8 w-28 h-28 md:w-36 md:h-36 bg-pink/20 backdrop-blur-xl border border-white/20 flex items-center justify-center rounded-2xl shadow-2xl"
+                animate={{ y: [15, -15, 15], x: [10, -5, 10], rotate: [5, -10, 5] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute -bottom-4 -left-4 md:-bottom-8 md:-left-8 w-28 h-28 md:w-36 md:h-36 bg-surface/40 backdrop-blur-2xl border border-white/10 flex items-center justify-center rounded-3xl shadow-[0_0_40px_rgba(255,0,127,0.15)] group cursor-pointer hover:border-pink/50 hover:bg-surface/80 transition-all duration-500 z-20"
               >
                 <div className="text-center flex flex-col gap-0.5">
-                  <p className="text-2xl md:text-3xl font-black text-pink leading-none">IA</p>
+                  <motion.p 
+                    animate={{ scale: [1, 1.1, 1] }} 
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-pink to-accent leading-none drop-shadow-[0_0_15px_rgba(255,0,127,0.3)] group-hover:scale-110 transition-transform duration-500"
+                  >
+                    IA
+                  </motion.p>
                   <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-white/60">Impulsado</p>
                 </div>
               </motion.div>
@@ -171,10 +282,10 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+        className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
       >
-        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-muted">Desplazar</span>
-        <div className="w-px h-16 bg-white/10 relative overflow-hidden">
+        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-muted">Scroll</span>
+        <div className="w-px h-12 md:h-16 bg-white/10 relative overflow-hidden">
           <motion.div 
             animate={{ y: ["-100%", "100%"] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
