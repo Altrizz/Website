@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
+import { motion, useScroll, useTransform, AnimatePresence, useAnimation } from "motion/react";
 import { ArrowRight, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRef, useState, useEffect } from "react";
@@ -24,13 +24,19 @@ const WORD_EFFECTS = [
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [wordIdx, setWordIdx] = useState(0);
+  const shakeControls = useAnimation();
 
   useEffect(() => {
     const interval = setInterval(() => {
       setWordIdx((prev) => (prev + 1) % AGENCY_WORDS.length);
+      shakeControls.start({
+        scale: [1, 0.95, 1.03, 1],
+        rotate: [0, -1.5, 1.5, 0],
+        transition: { duration: 0.5, ease: "easeInOut" }
+      });
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [shakeControls]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -172,22 +178,27 @@ export default function Hero() {
                 transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
                 className="relative h-full w-full rounded-[2.5rem] shadow-2xl group"
               >
-                {/* Backwards Impact Pulse */}
+                {/* Noticeable Massive Double Pulse */}
                 <AnimatePresence mode="popLayout">
                   <motion.div
-                    key={`pulse-${wordIdx}`}
-                    initial={{ scale: 0.9, opacity: 0.8, borderWidth: '2px' }}
-                    animate={{ scale: 1.25, opacity: 0, borderWidth: '0px' }}
-                    transition={{ duration: 1.2, ease: "easeOut" }}
-                    className="absolute inset-0 rounded-[2.5rem] border-accent shadow-[0_0_40px_rgba(59,130,246,0.6)] z-0 pointer-events-none mix-blend-screen"
+                    key={`pulse-glow-${wordIdx}`}
+                    initial={{ scale: 0.8, opacity: 0.7 }}
+                    animate={{ scale: 1.6, opacity: 0 }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-tr from-accent/50 to-pink/50 blur-xl z-0 pointer-events-none mix-blend-screen"
+                  />
+                  <motion.div
+                    key={`pulse-ring-${wordIdx}`}
+                    initial={{ scale: 0.9, opacity: 1, borderWidth: '4px', borderColor: 'rgba(59,130,246,1)' }}
+                    animate={{ scale: 1.3, opacity: 0, borderWidth: '0px', borderColor: 'rgba(255,0,127,0)' }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="absolute inset-0 rounded-[2.5rem] shadow-[0_0_80px_rgba(59,130,246,0.8)] z-0 pointer-events-none"
                   />
                 </AnimatePresence>
 
-                {/* Inner Jitter Shake */}
+                {/* Inner Jitter Shake (No remounting) */}
                 <motion.div
-                  key={`shake-${wordIdx}`}
-                  animate={{ scale: [1, 0.96, 1.02, 1], rotate: [0, -1, 1, 0] }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  animate={shakeControls}
                   className="relative h-full w-full bg-[#05050a] border border-white/10 rounded-[2.5rem] flex items-center justify-center overflow-hidden"
                 >
                   {/* LAVA BLOBS (Fluid Gradients) */}
@@ -224,18 +235,35 @@ export default function Hero() {
                   {/* GLASS REFRACTION OVERLAY */}
                   <div className="absolute inset-0 backdrop-blur-[4px] bg-white/5 z-10" />
 
-                  {/* RANDOM EFFECT WORDS */}
+                  {/* RANDOM EFFECT WORDS WITH BLOCKY Inner Wave */}
                   <div className="absolute inset-0 z-20 flex items-center justify-center overflow-hidden overflow-clip">
-                    <AnimatePresence mode="wait">
+                    <AnimatePresence mode="popLayout">
                       <motion.div
                         key={wordIdx}
                         initial={WORD_EFFECTS[wordIdx % WORD_EFFECTS.length].initial}
                         animate={WORD_EFFECTS[wordIdx % WORD_EFFECTS.length].animate}
                         exit={WORD_EFFECTS[wordIdx % WORD_EFFECTS.length].exit}
                         transition={WORD_EFFECTS[wordIdx % WORD_EFFECTS.length].transition as any}
-                        className="absolute text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white whitespace-nowrap drop-shadow-2xl"
+                        className="absolute text-5xl md:text-6xl font-black whitespace-nowrap"
                       >
-                        {AGENCY_WORDS[wordIdx]}
+                        <div className="relative group">
+                          {/* Blocky Chromatic Drop Shadow layers mapped behind text */}
+                          <span className="absolute inset-0 text-pink translate-x-[4px] translate-y-[4px] opacity-80 z-0 select-none mix-blend-screen">
+                            {AGENCY_WORDS[wordIdx]}
+                          </span>
+                          <span className="absolute inset-0 text-accent -translate-x-[4px] -translate-y-[4px] opacity-80 z-0 select-none mix-blend-screen">
+                            {AGENCY_WORDS[wordIdx]}
+                          </span>
+                          
+                          {/* Inner Animated Wave Text layer */}
+                          <motion.span
+                            animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+                            transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+                            className="relative z-10 bg-gradient-to-r from-white via-pink to-white bg-[length:300%_auto] text-transparent bg-clip-text select-none block"
+                          >
+                            {AGENCY_WORDS[wordIdx]}
+                          </motion.span>
+                        </div>
                       </motion.div>
                     </AnimatePresence>
                   </div>
