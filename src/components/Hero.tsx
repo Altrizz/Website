@@ -50,8 +50,18 @@ export default function Hero() {
   const [wordIdx, setWordIdx] = useState(0);
   const shakeControls = useAnimation();
   const bgControls = useAnimation();
+  const globalPulseControls = useAnimation();
 
   useEffect(() => {
+    // Deep global background pulse (Occurs every 8 seconds, independent of character cycle)
+    const pulseInterval = setInterval(() => {
+      globalPulseControls.start({
+        opacity: [0.03, 0.08, 0.03],
+        scale: [1, 1.05, 1],
+        transition: { duration: 4, ease: "easeInOut" }
+      });
+    }, 8000);
+
     const interval = setInterval(() => {
       setWordIdx((prev) => (prev + 1) % AGENCY_WORDS.length);
       
@@ -71,8 +81,11 @@ export default function Hero() {
       });
 
     }, 3000);
-    return () => clearInterval(interval);
-  }, [shakeControls, bgControls]);
+    return () => {
+      clearInterval(interval);
+      clearInterval(pulseInterval);
+    };
+  }, [shakeControls, bgControls, globalPulseControls]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -86,14 +99,27 @@ export default function Hero() {
 
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center pt-32 pb-32 overflow-hidden">
+      {/* Background Pulse Glow */}
+      <motion.div
+        animate={globalPulseControls}
+        initial={{ opacity: 0.03 }}
+        style={{ backgroundImage: "var(--background-radial-pulse)" }}
+        className="absolute inset-0 pointer-events-none z-0"
+      />
+
       {/* Background Text Accent */}
       <motion.div 
-        initial={{ opacity: 0, x: 100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute top-1/2 right-0 -translate-y-1/2 text-[25vw] font-black text-white/[0.02] leading-none pointer-events-none select-none whitespace-nowrap"
+        initial={{ x: 100, opacity: 0 }}
+        animate={{ 
+          x: 0, 
+          opacity: 0.02,
+          transition: { duration: 1.5, ease: "easeOut" }
+        }}
+        className="absolute top-1/2 right-0 -translate-y-1/2 text-[25vw] font-black text-white leading-none pointer-events-none select-none whitespace-nowrap z-0"
       >
-        AURA DIGITAL
+        <motion.div animate={globalPulseControls}>
+          AURA DIGITAL
+        </motion.div>
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 w-full relative z-10">

@@ -152,6 +152,8 @@
     --radius-2xl: calc(var(--radius) * 1.8);
     --radius-3xl: calc(var(--radius) * 2.2);
     --radius-4xl: calc(var(--radius) * 2.6);
+
+  --background-radial-pulse: radial-gradient(circle at center, rgba(255, 0, 127, 0.15) 0%, transparent 70%);
 }
 
 :root {
