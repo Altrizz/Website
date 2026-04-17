@@ -20,7 +20,7 @@ export default function App() {
   });
 
   return (
-    <div className="min-h-screen bg-bg relative selection:bg-pink selection:text-white">
+    <div className="min-h-screen bg-bg relative selection:bg-pink selection:text-white overflow-x-hidden">
       <Cursor />
       <InteractiveBackground />
       
@@ -40,14 +40,20 @@ export default function App() {
           
           <Marquee text={["Estrategia", "Diseño", "IA", "Escala", "Precisión", "Crecimiento"]} />
 
-          <Services />
+          <div className="relative z-20">
+            <Services />
+          </div>
           
-          <Process />
+          <div className="relative z-20">
+            <Process />
+          </div>
 
-          <Portfolio />
+          <div className="relative z-20">
+            <Portfolio />
+          </div>
           
           {/* About / CTA Section */}
-          <section id="about" className="py-12 md:py-24 bg-bg relative overflow-hidden">
+          <section id="about" className="py-16 md:py-24 relative overflow-hidden z-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <motion.div
@@ -112,7 +118,7 @@ export default function App() {
           </section>
 
           {/* Final CTA Section */}
-          <section className="py-12 md:py-24 bg-bg text-white relative overflow-hidden">
+          <section className="py-12 md:py-24 text-white relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 relative z-10">
               <div className="text-center max-w-4xl mx-auto">
                 <h2 className="text-massive text-white mb-12 uppercase">¿LISTO PARA DEFINIR EL FUTURO?</h2>
@@ -133,7 +139,7 @@ export default function App() {
           </section>
 
           {/* Footer */}
-          <footer className="bg-bg border-t border-white/10 pt-20 pb-12 relative overflow-hidden">
+          <footer className="border-t border-white/10 pt-20 pb-12 relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 mb-32">
                 <div className="lg:col-span-5">

@@ -15,7 +15,11 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-[90] transition-all duration-500 ${
+    <motion.nav 
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className={`fixed top-0 left-0 right-0 z-[90] transition-all duration-500 ${
       scrolled ? "bg-bg/80 backdrop-blur-xl border-b border-white/10 py-3" : "bg-transparent py-5"
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 flex justify-between items-center w-full">
@@ -26,17 +30,23 @@ export default function Navbar() {
             { name: 'Soluciones', href: '#services' },
             { name: 'Proyectos', href: '#work' },
             { name: 'Agencia', href: '#about' }
-          ].map((item) => (
-            <a 
+          ].map((item, i) => (
+            <motion.a 
               key={item.name}
               href={item.href} 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 + (i * 0.1), ease: "easeOut" }}
               className="text-[10px] font-black uppercase tracking-[0.3em] text-muted hover:text-white transition-colors relative group"
             >
               {item.name}
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent group-hover:w-full transition-all duration-300" />
-            </a>
+            </motion.a>
           ))}
           <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
             whileHover={{ x: -2, y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -85,6 +95,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 }

@@ -48,7 +48,7 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-12 md:py-20 bg-bg relative overflow-hidden">
+    <section id="services" className="py-12 md:py-20 relative overflow-hidden">
       {/* Background Text Accent */}
       <div className="absolute top-0 right-0 text-[15vw] font-black text-white/[0.02] leading-none pointer-events-none select-none translate-y-1/4">
         SERVICIOS

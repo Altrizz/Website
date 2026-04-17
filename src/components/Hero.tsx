@@ -1,10 +1,22 @@
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRef } from "react";
 
 export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 250]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [0, 350]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
   return (
-    <section className="relative min-h-[80vh] flex items-center pt-20 overflow-hidden bg-bg">
+    <section ref={containerRef} className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
       {/* Background Text Accent */}
       <motion.div 
         initial={{ opacity: 0, x: 100 }}
@@ -22,35 +34,77 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              style={{ opacity }}
             >
               <span className="section-label">Agencia de Excelencia Digital</span>
-              <h1 className="text-massive mb-8">
-                DEFINIENDO LA <br />
-                <span className="text-accent">FRONTERA</span> <span className="text-pink">DIGITAL</span>.
+              
+              <h1 className="text-massive mb-8 overflow-hidden">
+                <motion.div 
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ y: y1 }}
+                  className="block"
+                >
+                  DEFINIENDO LA
+                </motion.div>
+                <div className="flex flex-wrap gap-x-4">
+                  <motion.span 
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ y: y2 }}
+                    className="text-accent block"
+                  >
+                    FRONTERA
+                  </motion.span>
+                  <motion.span 
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ y: y3 }}
+                    className="text-pink block"
+                  >
+                    DIGITAL.
+                  </motion.span>
+                </div>
               </h1>
-              <p className="text-xl text-muted mb-12 leading-relaxed max-w-xl">
-                Combinamos precisión quirúrgica en diseño con estrategia avanzada de IA para acelerar 
-                tu marca hacia el futuro de la economía digital.
+
+              <p className="text-xl text-muted mb-12 leading-relaxed max-w-xl overflow-hidden">
+                <motion.span 
+                  initial={{ y: "100%", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="block"
+                >
+                  Combinamos precisión quirúrgica en diseño con estrategia avanzada de IA para acelerar 
+                  tu marca hacia el futuro de la economía digital.
+                </motion.span>
               </p>
               
-              <div className="flex flex-wrap gap-6">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+                className="flex flex-wrap gap-6"
+              >
                 <motion.div
                   whileHover={{ x: -2, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Button className="cta-button btn-glitch">
-                    Ver Portafolio <ArrowRight className="w-4 h-4" />
+                  <Button className="cta-button btn-glitch group">
+                    Ver Portafolio <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </motion.div>
                 <motion.div
                   whileHover={{ x: -2, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Button className="cta-button btn-glitch">
-                    Nuestro Proceso <Zap className="w-4 h-4" />
+                  <Button className="cta-button btn-glitch group gap-2">
+                    Nuestro Proceso <Zap className="w-4 h-4 text-accent group-hover:scale-110 transition-transform" />
                   </Button>
                 </motion.div>
-              </div>
+              </motion.div>
             </motion.div>
 
             <motion.div 
@@ -120,7 +174,13 @@ export default function Hero() {
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
       >
         <span className="text-[10px] font-black uppercase tracking-[0.4em] text-muted">Desplazar</span>
-        <div className="w-px h-12 bg-gradient-to-b from-white/20 to-transparent" />
+        <div className="w-px h-16 bg-white/10 relative overflow-hidden">
+          <motion.div 
+            animate={{ y: ["-100%", "100%"] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-0 w-full h-1/2 bg-gradient-to-b from-transparent via-accent to-transparent"
+          />
+        </div>
       </motion.div>
     </section>
   );
