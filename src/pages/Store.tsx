@@ -1,7 +1,9 @@
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ShoppingBag, Layout, Play, BarChart3, Users2, ShieldCheck, Zap, HeartHandshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import QuoteForm from "@/src/components/QuoteForm";
 
 const SERVICES = [
   {
@@ -58,6 +60,9 @@ const SERVICES = [
 
 export default function Store() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [selectedService, setSelectedService] = useState<typeof SERVICES[0] | null>(null);
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
@@ -65,6 +70,11 @@ export default function Store() {
 
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
+
+  const openQuote = (service: typeof SERVICES[0]) => {
+    setSelectedService(service);
+    setIsQuoteOpen(true);
+  };
 
   return (
     <div ref={containerRef} className="min-h-screen pt-32 pb-24 px-4 sm:px-6 lg:px-16">
@@ -125,7 +135,10 @@ export default function Store() {
 
                 <div className="flex items-center justify-between gap-4">
                   <p className="text-2xl font-light text-white">{service.price}</p>
-                  <Button className="h-12 px-6 bg-white text-black font-black uppercase text-xs tracking-widest gap-2 group-hover:bg-pink group-hover:text-white transition-all">
+                  <Button 
+                    onClick={() => openQuote(service)}
+                    className="h-12 px-6 bg-white text-black font-black uppercase text-xs tracking-widest gap-2 group-hover:bg-pink group-hover:text-white transition-all"
+                  >
                     Cotizar <ShoppingBag className="w-4 h-4" />
                   </Button>
                 </div>
@@ -134,6 +147,24 @@ export default function Store() {
           </motion.div>
         ))}
       </div>
+
+      {/* Quote Dialog */}
+      <Dialog open={isQuoteOpen} onOpenChange={setIsQuoteOpen}>
+        <DialogContent className="sm:max-w-[500px] bg-bg border-white/10 p-8">
+          <DialogHeader>
+            <DialogTitle className="text-4xl font-black uppercase tracking-tighter text-white mb-2">Solicitar Cotización</DialogTitle>
+            <DialogDescription className="text-muted text-sm uppercase tracking-widest leading-relaxed">
+              Iniciando despliegue estratégico para: <span className="text-pink font-bold">{selectedService?.name}</span>
+            </DialogDescription>
+          </DialogHeader>
+          {selectedService && (
+            <QuoteForm 
+              service={selectedService} 
+              onComplete={() => setIsQuoteOpen(false)} 
+            />
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* Trust Badges - Service Focused */}
       <section className="mt-32 pt-24 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-12">

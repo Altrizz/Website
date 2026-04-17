@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform, AnimatePresence, useAnimation } from "
 import { ArrowRight, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const AGENCY_WORDS = [
   "STRATEGY",
@@ -190,17 +191,17 @@ export default function Hero() {
                   whileHover={{ x: -2, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Button className="cta-button btn-glitch group">
+                  <Link to="/#work" className="cta-button btn-glitch group inline-flex items-center">
                     Ver Portafolio <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                  </Link>
                 </motion.div>
                 <motion.div
                   whileHover={{ x: -2, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Button className="cta-button btn-glitch group gap-2">
-                    Nuestro Proceso <Zap className="w-4 h-4 text-pink group-hover:scale-110 transition-transform" />
-                  </Button>
+                  <Link to="/store" className="cta-button btn-glitch group inline-flex items-center gap-2">
+                    Servicios <Zap className="w-4 h-4 text-pink group-hover:scale-110 transition-transform" />
+                  </Link>
                 </motion.div>
               </motion.div>
             </motion.div>

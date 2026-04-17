@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
-import { Palette, Zap, Cpu, TrendingUp, Globe, BarChart3 } from "lucide-react";
+import { Palette, Zap, Cpu, TrendingUp, Globe, BarChart3, ArrowRight } from "lucide-react";
 import DecipherText from "./DecipherText";
+import { Link } from "react-router-dom";
 
 export default function Services() {
   const services = [
@@ -99,6 +100,17 @@ export default function Services() {
             </motion.div>
           ))}
         </div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 text-center"
+        >
+          <Link to="/store" className="cta-button inline-flex items-center gap-2 group">
+            Ver Catálogo de Servicios <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
