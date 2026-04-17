@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Palette, Zap, Cpu, TrendingUp, Globe, BarChart3 } from "lucide-react";
+import DecipherText from "./DecipherText";
 
 export default function Services() {
   const services = [
@@ -58,7 +59,7 @@ export default function Services() {
         <div className="mb-20">
           <span className="section-label">Capacidades</span>
           <h2 className="text-massive">
-            CONSTRUIMOS <span className="text-accent">VALOR</span>.
+            <DecipherText text="CONSTRUIMOS" /> <span className="text-accent"><DecipherText text="VALOR." /></span>
           </h2>
         </div>
 

@@ -60,17 +60,16 @@ export default function Loader({ onComplete }: { onComplete: () => void; key?: s
             <motion.span
               key={i}
               animate={{ 
-                // Much gentler, flowy styling. No violent shaking.
-                filter: isResolved ? "blur(0px)" : "blur(6px)",
+                filter: isResolved ? "blur(0px) contrast(100%)" : "blur(8px) contrast(150%)",
                 opacity: isResolved ? 1 : 0.4,
-                y: isResolved ? 0 : [ -3, 3, -3 ] 
+                scale: isResolved ? 1 : 1.05
               }}
               transition={{ 
-                y: { repeat: Infinity, duration: 1.5, ease: "easeInOut" },
                 filter: { duration: 0.8 },
-                opacity: { duration: 0.8 }
+                opacity: { duration: 0.8 },
+                scale: { duration: 0.8, ease: "easeOut" }
               }}
-              className="inline-block"
+              className={`inline-block ${!isResolved ? "text-pink/60 drop-shadow-[0_0_15px_rgba(255,0,127,0.8)]" : "drop-shadow-none"} transition-colors duration-700`}
             >
               {char}
             </motion.span>

@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Search, Lightbulb, Code, Rocket, ArrowRight, CheckCircle2, Clock, Zap } from "lucide-react";
+import { AssembleText } from "./TextAnimations";
 
 const steps = [
   {
@@ -70,9 +71,9 @@ export default function Process() {
           <div className="max-w-4xl relative z-10">
             <span className="section-label">Nuestra Metodología</span>
             <h2 className="text-massive uppercase leading-[0.95] tracking-tight mb-8">
-              EL FLUJO DE <br />
-              <span className="text-accent">ACELERACIÓN</span> <br />
-              <span className="text-pink italic">EFICAZ</span>.
+              <AssembleText text="EL FLUJO DE" /> <br />
+              <span className="text-accent"><AssembleText text="ACELERACIÓN" /></span> <br />
+              <span className="text-pink italic"><AssembleText text="EFICAZ." /></span>
             </h2>
           </div>
           <div className="flex items-center gap-4 text-muted relative z-10">

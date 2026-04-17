@@ -9,6 +9,8 @@ import Marquee from "@/src/components/Marquee";
 import Process from "@/src/components/Process";
 import InteractiveBackground from "@/src/components/InteractiveBackground";
 import Loader from "@/src/components/Loader";
+import DecipherText from "@/src/components/DecipherText";
+import { VelocityText, PerspectiveText, GlitchText } from "@/src/components/TextAnimations";
 import { Logo } from "@/src/components/Logo";
 import { ArrowUpRight, Instagram, Twitter, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -105,8 +107,8 @@ export default function App() {
                   className="relative z-20"
                 >
                   <span className="section-label">Nuestra Filosofía</span>
-                  <h2 className="text-massive mb-8 max-w-2xl lg:max-w-none uppercase">
-                    NO SOLO CONSTRUIMOS. <br /> <span className="text-pink">ACELERAMOS</span>.
+                  <h2 className="text-massive mb-8 max-w-2xl lg:max-w-none uppercase font-black tracking-tighter">
+                    <VelocityText text="NO SOLO CONSTRUIMOS." /> <br /> <span className="text-pink"><VelocityText text="ACELERAMOS." /></span>
                   </h2>
                   <p className="text-xl text-muted mb-12 leading-relaxed max-w-lg">
                     Aura Digital se fundó sobre una premisa simple: el futuro pertenece a quienes pueden aprovechar el poder de la IA y el diseño con precisión quirúrgica.
@@ -168,7 +170,9 @@ export default function App() {
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 relative z-10">
               <div className="text-center max-w-4xl mx-auto">
-                <h2 className="text-massive text-white mb-12 uppercase">¿LISTO PARA DEFINIR EL FUTURO?</h2>
+                <h2 className="text-massive text-white mb-12 uppercase font-black tracking-tighter drop-shadow-2xl">
+                  <PerspectiveText text="¿LISTO PARA DEFINIR EL FUTURO?" />
+                </h2>
                 <div className="flex flex-wrap justify-center gap-8">
                   <button className="cta-button">
                     Inicia tu Proyecto
@@ -198,8 +202,8 @@ export default function App() {
                 <div className="lg:col-span-5">
                   <Logo />
                   <p className="text-2xl font-bold text-white mt-12 mb-12 leading-tight tracking-tighter">
-                    SOMOS LOS ARQUITECTOS DE LA <br />
-                    <span className="text-accent">EXCELENCIA DIGITAL</span>.
+                    <GlitchText text="SOMOS LOS ARQUITECTOS DE LA" /> <br />
+                    <span className="text-accent"><GlitchText text="EXCELENCIA DIGITAL." /></span>
                   </p>
                   <div className="flex gap-6">
                     {[Instagram, Twitter, Linkedin].map((Icon, i) => (

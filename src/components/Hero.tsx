@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, AnimatePresence, useAnimation } from "motion/react";
-import { ArrowRight, Zap } from "lucide-react";
+import { ArrowRight, Zap, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRef, useState, useEffect } from "react";
 
@@ -29,11 +29,14 @@ export default function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setWordIdx((prev) => (prev + 1) % AGENCY_WORDS.length);
+      
+      // Shake the lava lamp container
       shakeControls.start({
         scale: [1, 0.95, 1.03, 1],
         rotate: [0, -1.5, 1.5, 0],
         transition: { duration: 0.5, ease: "easeInOut" }
       });
+
     }, 3000);
     return () => clearInterval(interval);
   }, [shakeControls]);
@@ -71,37 +74,40 @@ export default function Hero() {
             >
               <span className="section-label">Agencia de Excelencia Digital</span>
               
-              <h1 className="text-massive mb-8 overflow-hidden">
-                <motion.div 
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                  style={{ y: y1 }}
-                  className="block"
-                >
-                  DEFINIENDO LA
-                </motion.div>
-                <div className="flex flex-wrap gap-x-4">
-                  <motion.span 
+              <div className="relative">
+
+                <h1 className="text-massive mb-8 relative z-10 overflow-hidden">
+                  <motion.div 
                     initial={{ y: "100%" }}
                     animate={{ y: 0 }}
-                    transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ y: y2 }}
-                    className="text-accent block"
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ y: y1 }}
+                    className="block"
                   >
-                    FRONTERA
-                  </motion.span>
-                  <motion.span 
-                    initial={{ y: "100%" }}
-                    animate={{ y: 0 }}
-                    transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ y: y3 }}
-                    className="text-pink block"
-                  >
-                    DIGITAL.
-                  </motion.span>
-                </div>
-              </h1>
+                    DEFINIENDO LA
+                  </motion.div>
+                  <div className="flex flex-wrap gap-x-4 relative">
+                    <motion.span 
+                      initial={{ y: "100%" }}
+                      animate={{ y: 0 }}
+                      transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                      style={{ y: y2 }}
+                      className="text-accent block"
+                    >
+                      FRONTERA
+                    </motion.span>
+                    <motion.span 
+                      initial={{ y: "100%" }}
+                      animate={{ y: 0 }}
+                      transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      style={{ y: y3 }}
+                      className="text-pink block relative origin-bottom-left"
+                    >
+                      DIGITAL.
+                    </motion.span>
+                  </div>
+                </h1>
+              </div>
 
               <p className="text-xl text-muted mb-12 leading-relaxed max-w-xl overflow-hidden">
                 <motion.span 
@@ -165,6 +171,47 @@ export default function Hero() {
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               className="relative aspect-square max-w-[450px] mx-auto lg:ml-auto"
             >
+              {/* Floating Letters Erupting from the Square into the Background */}
+              <div className="absolute inset-0 z-[-1] pointer-events-none flex items-center justify-center">
+                <AnimatePresence>
+                  {AGENCY_WORDS[wordIdx].split('').map((char, i) => {
+                    const totalChars = AGENCY_WORDS[wordIdx].length;
+                    // Spread in a full circle around the center
+                    const angle = (i / totalChars) * Math.PI * 2 + (Math.random() * 0.5);
+                    const distanceParams = [100, 250 + Math.random() * 150]; // Outward trajectory
+                    // Map distances to relative offsets
+                    const startX = Math.cos(angle) * 120;
+                    const startY = Math.sin(angle) * 120;
+                    const endX = Math.cos(angle) * distanceParams[1];
+                    const endY = Math.sin(angle) * distanceParams[1];
+
+                    return (
+                      <motion.span
+                        key={`erupt-${wordIdx}-${i}-${char}`}
+                        initial={{ opacity: 0, x: startX, y: startY, scale: 0.5, filter: "blur(0px)", z: 0 }}
+                        animate={{
+                          opacity: [0, 0.8, 0],
+                          x: endX,
+                          y: endY,
+                          scale: [0.5, 1.2, 0.2], // Grow out, then shrink back into deep space
+                          rotate: Math.random() * 360,
+                          filter: ["blur(0px)", "blur(2px)", "blur(15px)"], // Fade into background blur
+                        }}
+                        transition={{
+                          duration: 3 + Math.random(),
+                          ease: "easeOut",
+                          delay: Math.random() * 0.5 // Non-linear eruption
+                        }}
+                        className="absolute font-black text-2xl md:text-5xl mix-blend-screen drop-shadow-[0_0_15px_rgba(59,130,246,0.8)]"
+                        style={{ color: i % 2 === 0 ? "#3b82f6" : "#ff007f" }}
+                      >
+                        {char}
+                      </motion.span>
+                    );
+                  })}
+                </AnimatePresence>
+              </div>
+
               {/* Spinning background ambient glow */}
               <motion.div 
                 animate={{ rotate: 360, scale: [1, 1.2, 1] }}

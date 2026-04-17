@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowUpRight, ArrowLeft, ArrowRight } from "lucide-react";
+import { GlitchText } from "./TextAnimations";
 
 const projects = [
   {
@@ -45,7 +46,7 @@ export default function Portfolio() {
           <div>
             <span className="section-label">Proyectos Seleccionados</span>
             <h2 className="text-massive">
-              CREANDO <span className="text-accent">IMPACTO</span>.
+              <GlitchText text="CREANDO" /> <span className="text-accent"><GlitchText text="IMPACTO." /></span>
             </h2>
           </div>
           <div className="flex gap-4">
