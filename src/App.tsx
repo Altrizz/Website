@@ -1,4 +1,4 @@
-import { motion, useScroll, useSpring } from "motion/react";
+import { motion, useScroll, useSpring, AnimatePresence } from "motion/react";
 import Navbar from "@/src/components/Navbar";
 import Hero from "@/src/components/Hero";
 import Services from "@/src/components/Services";
@@ -8,10 +8,13 @@ import Cursor from "@/src/components/Cursor";
 import Marquee from "@/src/components/Marquee";
 import Process from "@/src/components/Process";
 import InteractiveBackground from "@/src/components/InteractiveBackground";
+import Loader from "@/src/components/Loader";
 import { Logo } from "@/src/components/Logo";
 import { ArrowUpRight, Instagram, Twitter, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export default function App() {
+  const [loading, setLoading] = useState(true);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -19,8 +22,21 @@ export default function App() {
     restDelta: 0.001
   });
 
+  useEffect(() => {
+    if (loading) {
+      window.scrollTo(0, 0);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+  }, [loading]);
+
   return (
-    <div className="min-h-screen bg-bg relative selection:bg-pink selection:text-white overflow-x-hidden">
+    <div className={`min-h-screen bg-bg relative selection:bg-pink selection:text-white ${loading ? "h-screen overflow-hidden" : "overflow-x-hidden"}`}>
+      <AnimatePresence mode="wait">
+        {loading && <Loader key="loader" onComplete={() => setLoading(false)} />}
+      </AnimatePresence>
+
       <Cursor />
       <InteractiveBackground />
       
@@ -33,34 +49,59 @@ export default function App() {
         style={{ scaleX }}
       />
 
-      <div className="relative z-10">
+      <div className={`relative z-10 transition-opacity duration-1000 ${loading ? "opacity-0" : "opacity-100"}`}>
         <Navbar />
         <main>
           <Hero />
           
           <Marquee text={["Estrategia", "Diseño", "IA", "Escala", "Precisión", "Crecimiento"]} />
 
-          <div className="relative z-20">
+          <motion.div 
+            initial={{ opacity: 0, y: 150, rotateX: 10 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-20"
+          >
             <Services />
-          </div>
+          </motion.div>
           
-          <div className="relative z-20">
+          <motion.div 
+            initial={{ opacity: 0, x: 200, skewX: -10 }}
+            whileInView={{ opacity: 1, x: 0, skewX: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-20"
+          >
             <Process />
-          </div>
+          </motion.div>
 
-          <div className="relative z-20">
+          <motion.div 
+            initial={{ opacity: 0, x: -200, y: 100 }}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-20"
+          >
             <Portfolio />
-          </div>
+          </motion.div>
           
           {/* About / CTA Section */}
-          <section id="about" className="py-16 md:py-24 relative overflow-hidden z-20">
+          <motion.section 
+            initial={{ opacity: 0, y: -150 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+            id="about" 
+            className="py-16 md:py-24 relative overflow-hidden z-20"
+          >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <motion.div
-                  initial={{ opacity: 0, x: -40 }}
+                  initial={{ opacity: 0, x: -100 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.8 }}
+                  transition={{ duration: 1, delay: 0.2 }}
                   className="relative z-20"
                 >
                   <span className="section-label">Nuestra Filosofía</span>
@@ -115,10 +156,16 @@ export default function App() {
                 </div>
               </div>
             </div>
-          </section>
+          </motion.section>
 
           {/* Final CTA Section */}
-          <section className="py-12 md:py-24 text-white relative overflow-hidden">
+          <motion.section 
+            initial={{ opacity: 0, scale: 0.9, y: 150 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1.2, ease: "backOut" }}
+            className="py-12 md:py-24 text-white relative overflow-hidden"
+          >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 relative z-10">
               <div className="text-center max-w-4xl mx-auto">
                 <h2 className="text-massive text-white mb-12 uppercase">¿LISTO PARA DEFINIR EL FUTURO?</h2>
@@ -136,10 +183,16 @@ export default function App() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-black text-white/[0.02] whitespace-nowrap pointer-events-none">
               AURA DIGITAL
             </div>
-          </section>
+          </motion.section>
 
           {/* Footer */}
-          <footer className="border-t border-white/10 pt-20 pb-12 relative overflow-hidden">
+          <motion.footer 
+            initial={{ opacity: 0, y: 100, rotateX: -20 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+            viewport={{ once: true, margin: "0px" }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="border-t border-white/10 pt-20 pb-12 relative overflow-hidden"
+          >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 mb-32">
                 <div className="lg:col-span-5">
@@ -232,7 +285,7 @@ export default function App() {
             <div className="absolute bottom-0 right-0 text-[30vw] font-black text-white/[0.01] leading-none pointer-events-none translate-y-1/4">
               AURA
             </div>
-          </footer>
+          </motion.footer>
         </main>
 
         <AIConsultant />
