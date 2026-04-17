@@ -23,9 +23,9 @@ export default function Navbar() {
         
         <div className="hidden md:flex items-center gap-12">
           {[
-            { name: 'Solutions', href: '#services' },
-            { name: 'Work', href: '#work' },
-            { name: 'Agency', href: '#about' }
+            { name: 'Soluciones', href: '#services' },
+            { name: 'Proyectos', href: '#work' },
+            { name: 'Agencia', href: '#about' }
           ].map((item) => (
             <a 
               key={item.name}
@@ -41,7 +41,7 @@ export default function Navbar() {
             whileTap={{ scale: 0.98 }}
           >
             <Button className="cta-button btn-glitch">
-              Start a Project
+              Iniciar Proyecto
             </Button>
           </motion.div>
         </div>
@@ -64,9 +64,9 @@ export default function Navbar() {
             className="absolute top-full left-0 right-0 bg-surface border-b border-white/10 p-8 md:hidden flex flex-col gap-8 shadow-2xl z-[100]"
           >
             {[
-              { name: 'Solutions', href: '#services' },
-              { name: 'Work', href: '#work' },
-              { name: 'Agency', href: '#about' }
+              { name: 'Soluciones', href: '#services' },
+              { name: 'Proyectos', href: '#work' },
+              { name: 'Agencia', href: '#about' }
             ].map((item) => (
               <a 
                 key={item.name}
@@ -80,7 +80,7 @@ export default function Navbar() {
             <motion.div
               whileTap={{ scale: 0.98 }}
             >
-              <Button className="w-full cta-button btn-glitch">Start a Project</Button>
+              <Button className="w-full cta-button btn-glitch">Iniciar Proyecto</Button>
             </motion.div>
           </motion.div>
         )}

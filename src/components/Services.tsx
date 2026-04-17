@@ -4,43 +4,43 @@ import { Palette, Zap, Cpu, TrendingUp, Globe, BarChart3 } from "lucide-react";
 export default function Services() {
   const services = [
     {
-      title: "AI Strategy",
-      description: "Custom AI roadmaps tailored to your business goals and market position.",
+      title: "Estrategia de IA",
+      description: "Mapas de ruta de IA personalizados y adaptados a tus objetivos comerciales y posición en el mercado.",
       icon: <Cpu className="w-8 h-8" />,
       color: "accent",
       size: "large"
     },
     {
-      title: "Digital Design",
-      description: "High-fidelity interfaces that convert and captivate.",
+      title: "Diseño Digital",
+      description: "Interfaces de alta fidelidad que convierten y cautivan.",
       icon: <Palette className="w-8 h-8" />,
       color: "pink",
       size: "small"
     },
     {
-      title: "Growth Engine",
-      description: "Data-driven marketing automation and performance scaling.",
+      title: "Motor de Crecimiento",
+      description: "Automatización de marketing basada en datos y escalado de rendimiento.",
       icon: <TrendingUp className="w-8 h-8" />,
       color: "accent",
       size: "small"
     },
     {
-      title: "Brand Identity",
-      description: "Defining your digital presence in a crowded marketplace.",
+      title: "Identidad de Marca",
+      description: "Definiendo tu presencia digital en un mercado saturado.",
       icon: <Zap className="w-8 h-8" />,
       color: "pink",
       size: "large"
     },
     {
-      title: "Global Scale",
-      description: "Expanding your reach across borders with localized digital strategies.",
+      title: "Escala Global",
+      description: "Expandiendo tu alcance a través de fronteras con estrategias digitales localizadas.",
       icon: <Globe className="w-8 h-8" />,
       color: "accent",
       size: "small"
     },
     {
-      title: "Data Intelligence",
-      description: "Advanced analytics to drive informed decision making at every level.",
+      title: "Inteligencia de Datos",
+      description: "Analítica avanzada para impulsar la toma de decisiones informada en todos los niveles.",
       icon: <BarChart3 className="w-8 h-8" />,
       color: "pink",
       size: "small"
@@ -51,14 +51,14 @@ export default function Services() {
     <section id="services" className="py-12 md:py-20 bg-bg relative overflow-hidden">
       {/* Background Text Accent */}
       <div className="absolute top-0 right-0 text-[15vw] font-black text-white/[0.02] leading-none pointer-events-none select-none translate-y-1/4">
-        SERVICES
+        SERVICIOS
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 relative z-10">
         <div className="mb-20">
-          <span className="section-label">Capabilities</span>
+          <span className="section-label">Capacidades</span>
           <h2 className="text-massive">
-            WE BUILD <span className="text-accent">VALUE</span>.
+            CONSTRUIMOS <span className="text-accent">VALOR</span>.
           </h2>
         </div>
 

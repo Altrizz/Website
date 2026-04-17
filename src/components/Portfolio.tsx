@@ -4,28 +4,28 @@ import { ArrowUpRight, ArrowLeft, ArrowRight } from "lucide-react";
 const projects = [
   {
     title: "NEON VELOCITY",
-    category: "AI Campaign",
+    category: "Campaña de IA",
     image: "https://picsum.photos/seed/neon/1200/800",
     year: "2024",
     size: "large"
   },
   {
     title: "SILVER LINING",
-    category: "Brand Identity",
+    category: "Identidad de Marca",
     image: "https://picsum.photos/seed/silver/1200/800",
     year: "2024",
     size: "small"
   },
   {
     title: "QUANTUM FLOW",
-    category: "Web Experience",
+    category: "Experiencia Web",
     image: "https://picsum.photos/seed/quantum/1200/800",
     year: "2024",
     size: "small"
   },
   {
     title: "ORBITAL DATA",
-    category: "Analytics Platform",
+    category: "Plataforma Analítica",
     image: "https://picsum.photos/seed/orbital/1200/800",
     year: "2024",
     size: "large"
@@ -37,15 +37,15 @@ export default function Portfolio() {
     <section id="work" className="py-12 md:py-20 bg-bg text-white overflow-hidden relative">
       {/* Background Text Accent */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 text-[15vw] font-black text-white/[0.01] leading-none pointer-events-none select-none -rotate-90 origin-left">
-        PORTFOLIO
+        PORTAFOLIO
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
           <div>
-            <span className="section-label">Selected Work</span>
+            <span className="section-label">Proyectos Seleccionados</span>
             <h2 className="text-massive">
-              CRAFTING <span className="text-accent">IMPACT</span>.
+              CREANDO <span className="text-accent">IMPACTO</span>.
             </h2>
           </div>
           <div className="flex gap-4">
@@ -91,7 +91,7 @@ export default function Portfolio() {
 
                 <div className="absolute bottom-8 left-8 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
                   <span className="px-4 py-2 bg-accent text-black text-[10px] font-black uppercase tracking-widest rounded-lg">
-                    View Project
+                    Ver Proyecto
                   </span>
                 </div>
               </div>
@@ -106,7 +106,7 @@ export default function Portfolio() {
                   </h3>
                 </div>
                 <div className="text-right">
-                  <span className="text-muted font-mono text-xs opacity-50 block mb-1">YEAR</span>
+                  <span className="text-muted font-mono text-xs opacity-50 block mb-1">AÑO</span>
                   <span className="text-white font-mono text-sm">{project.year}</span>
                 </div>
               </div>

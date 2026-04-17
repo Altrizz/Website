@@ -38,7 +38,7 @@ export default function App() {
         <main>
           <Hero />
           
-          <Marquee text={["Strategy", "Design", "AI", "Scale", "Precision", "Growth"]} />
+          <Marquee text={["Estrategia", "Diseño", "IA", "Escala", "Precisión", "Crecimiento"]} />
 
           <Services />
           
@@ -57,33 +57,33 @@ export default function App() {
                   transition={{ duration: 0.8 }}
                   className="relative z-20"
                 >
-                  <span className="section-label">Our Philosophy</span>
-                  <h2 className="text-massive mb-8 max-w-2xl lg:max-w-none">
-                    WE DON'T JUST BUILD. WE <span className="text-pink">ACCELERATE</span>.
+                  <span className="section-label">Nuestra Filosofía</span>
+                  <h2 className="text-massive mb-8 max-w-2xl lg:max-w-none uppercase">
+                    NO SOLO CONSTRUIMOS. <br /> <span className="text-pink">ACELERAMOS</span>.
                   </h2>
                   <p className="text-xl text-muted mb-12 leading-relaxed max-w-lg">
-                    Aura Digital was founded on a simple premise: the future belongs to those who can harness the power of AI and design with surgical precision.
+                    Aura Digital se fundó sobre una premisa simple: el futuro pertenece a quienes pueden aprovechar el poder de la IA y el diseño con precisión quirúrgica.
                   </p>
                   <div className="space-y-8">
                     <div className="flex items-center gap-6 group">
                       <div className="w-12 h-12 rounded-xl bg-white text-black flex items-center justify-center font-bold shadow-md group-hover:bg-accent group-hover:text-white transition-colors">1</div>
                       <div>
-                        <p className="font-bold text-lg text-white">Strategic Consultation</p>
-                        <p className="text-sm text-muted">Deep dive into your business goals.</p>
+                        <p className="font-bold text-lg text-white">Consulta Estratégica</p>
+                        <p className="text-sm text-muted">Inmersión profunda en tus objetivos comerciales.</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-6 group">
                       <div className="w-12 h-12 rounded-xl bg-white text-black flex items-center justify-center font-bold shadow-md group-hover:bg-pink group-hover:text-white transition-colors">2</div>
                       <div>
-                        <p className="font-bold text-lg text-white">Creative Execution</p>
-                        <p className="text-sm text-muted">Bringing vision to life with precision.</p>
+                        <p className="font-bold text-lg text-white">Ejecución Creativa</p>
+                        <p className="text-sm text-muted">Dando vida a tu visión con precisión extrema.</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-6 group">
                       <div className="w-12 h-12 rounded-xl bg-white text-black flex items-center justify-center font-bold shadow-md group-hover:bg-accent group-hover:text-white transition-colors">3</div>
                       <div>
-                        <p className="font-bold text-lg text-white">Continuous Optimization</p>
-                        <p className="text-sm text-muted">Data-driven growth and refinement.</p>
+                        <p className="font-bold text-lg text-white">Optimización Continua</p>
+                        <p className="text-sm text-muted">Crecimiento y refinamiento basados en datos.</p>
                       </div>
                     </div>
                   </div>
@@ -104,7 +104,7 @@ export default function App() {
                     className="absolute -bottom-10 -left-10 p-8 bg-surface rounded-2xl shadow-2xl border border-white/10 backdrop-blur-xl"
                   >
                     <p className="text-4xl font-extrabold tracking-tighter mb-2 text-pink">150%</p>
-                    <p className="text-[10px] text-muted font-black uppercase tracking-widest">Avg Annual Growth</p>
+                    <p className="text-[10px] text-muted font-black uppercase tracking-widest">Crecimiento Anual Prom.</p>
                   </motion.div>
                 </div>
               </div>
@@ -115,13 +115,13 @@ export default function App() {
           <section className="py-12 md:py-24 bg-bg text-white relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 relative z-10">
               <div className="text-center max-w-4xl mx-auto">
-                <h2 className="text-massive text-white mb-12 uppercase">READY TO DEFINE THE FUTURE?</h2>
+                <h2 className="text-massive text-white mb-12 uppercase">¿LISTO PARA DEFINIR EL FUTURO?</h2>
                 <div className="flex flex-wrap justify-center gap-8">
                   <button className="cta-button">
-                    Start Your Project
+                    Inicia tu Proyecto
                   </button>
                   <button className="cta-button-outline">
-                    View Our Work
+                    Ver Nuestro Trabajo
                   </button>
                 </div>
               </div>
@@ -139,8 +139,8 @@ export default function App() {
                 <div className="lg:col-span-5">
                   <Logo />
                   <p className="text-2xl font-bold text-white mt-12 mb-12 leading-tight tracking-tighter">
-                    WE ARE THE ARCHITECTS OF <br />
-                    <span className="text-accent">DIGITAL EXCELLENCE</span>.
+                    SOMOS LOS ARQUITECTOS DE LA <br />
+                    <span className="text-accent">EXCELENCIA DIGITAL</span>.
                   </p>
                   <div className="flex gap-6">
                     {[Instagram, Twitter, Linkedin].map((Icon, i) => (
@@ -158,20 +158,26 @@ export default function App() {
 
                 <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-12">
                   <div>
-                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-8">Navigation</h4>
+                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-8">Navegación</h4>
                     <ul className="space-y-4">
-                      {['Work', 'Services', 'Process', 'Agency', 'Contact'].map((item) => (
-                        <li key={item}>
-                          <a href={`#${item.toLowerCase()}`} className="text-muted hover:text-white transition-colors flex items-center gap-2 group">
+                      {[
+                        { name: 'Proyectos', id: 'work' },
+                        { name: 'Servicios', id: 'services' },
+                        { name: 'Proceso', id: 'process' },
+                        { name: 'Agencia', id: 'about' },
+                        { name: 'Contacto', id: 'contact' }
+                      ].map((item) => (
+                        <li key={item.id}>
+                          <a href={`#${item.id}`} className="text-muted hover:text-white transition-colors flex items-center gap-2 group">
                             <span className="w-0 h-px bg-accent group-hover:w-4 transition-all" />
-                            {item}
+                            {item.name}
                           </a>
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-pink mb-8">Contact</h4>
+                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-pink mb-8">Contacto</h4>
                     <ul className="space-y-6">
                       <li className="flex gap-4">
                         <Mail className="w-5 h-5 text-pink shrink-0" />
@@ -188,12 +194,12 @@ export default function App() {
                     </ul>
                   </div>
                   <div className="col-span-2 sm:col-span-1">
-                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-8">Newsletter</h4>
-                    <p className="text-muted text-xs mb-6 leading-relaxed">Get the latest insights on AI and design.</p>
+                    <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-8">Boletín</h4>
+                    <p className="text-muted text-xs mb-6 leading-relaxed">Recibe las últimas novedades sobre IA y diseño.</p>
                     <div className="relative">
                       <input 
                         type="email" 
-                        placeholder="Email Address" 
+                        placeholder="Correo Electrónico" 
                         className="w-full bg-surface border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-accent transition-colors"
                       />
                       <button className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-accent rounded-lg flex items-center justify-center text-black hover:scale-110 transition-transform">
@@ -206,12 +212,12 @@ export default function App() {
 
               <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
                 <div className="flex gap-8 text-[10px] font-black uppercase tracking-widest text-muted">
-                  <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                  <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-                  <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+                  <a href="#" className="hover:text-white transition-colors">Privacidad</a>
+                  <a href="#" className="hover:text-white transition-colors">Términos</a>
+                  <a href="#" className="hover:text-white transition-colors">Cookies</a>
                 </div>
                 <p className="text-[10px] font-black uppercase tracking-widest text-muted">
-                  © 2024 AURA DIGITAL. ALL RIGHTS RESERVED.
+                  © 2024 AURA DIGITAL. TODOS LOS DERECHOS RESERVADOS.
                 </p>
               </div>
             </div>

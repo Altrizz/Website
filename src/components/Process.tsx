@@ -4,52 +4,52 @@ import { Search, Lightbulb, Code, Rocket, ArrowRight, CheckCircle2, Clock, Zap }
 
 const steps = [
   {
-    title: "Discovery",
-    subtitle: "Phase 01",
-    desc: "We dive deep into your brand's DNA, market position, and AI potential. This isn't just research; it's digital archaeology.",
+    title: "Descubrimiento",
+    subtitle: "Fase 01",
+    desc: "Nos sumergimos en el ADN de tu marca, posición en el mercado y potencial de IA. No es solo investigación; es arqueología digital.",
     icon: <Search className="w-7 h-7" />,
     color: "from-accent/30 to-accent/5",
     accent: "bg-accent",
-    details: ["Market Analysis", "Brand Audit", "AI Opportunity Mapping"],
+    details: ["Análisis de Mercado", "Auditoría de Marca", "Mapeo de IA"],
     stat: "100%",
-    statLabel: "Transparency",
-    duration: "1-2 Weeks"
+    statLabel: "Transparencia",
+    duration: "1-2 Semanas"
   },
   {
-    title: "Strategy",
-    subtitle: "Phase 02",
-    desc: "Architecting a surgical roadmap for design and technical implementation. We define the blueprint for your digital dominance.",
+    title: "Estrategia",
+    subtitle: "Fase 02",
+    desc: "Arquitectamos un mapa de ruta quirúrgico para el diseño e implementación técnica. Definimos el plano para tu dominio digital.",
     icon: <Lightbulb className="w-7 h-7" />,
     color: "from-pink/30 to-pink/5",
     accent: "bg-pink",
-    details: ["UX Architecture", "Tech Stack Selection", "Growth Strategy"],
+    details: ["Arquitectura UX", "Selección de Tech Stack", "Estrategia de Crecimiento"],
     stat: "2.5x",
-    statLabel: "Efficiency Boost",
-    duration: "2 Weeks"
+    statLabel: "Impulso de Eficiencia",
+    duration: "2 Semanas"
   },
   {
-    title: "Execution",
-    subtitle: "Phase 03",
-    desc: "Building high-performance digital assets with precision and speed. Our developers and designers work in a tight feedback loop.",
+    title: "Ejecución",
+    subtitle: "Fase 03",
+    desc: "Construimos activos digitales de alto rendimiento con precisión y velocidad. Nuestros desarrolladores y diseñadores trabajan en equipo.",
     icon: <Code className="w-7 h-7" />,
     color: "from-accent/30 to-accent/5",
     accent: "bg-accent",
-    details: ["Surgical Design", "Rapid Prototyping", "AI Integration"],
+    details: ["Diseño Quirúrgico", "Prototipado Rápido", "Integración de IA"],
     stat: "60fps",
-    statLabel: "Performance",
-    duration: "4-8 Weeks"
+    statLabel: "Rendimiento",
+    duration: "4-8 Semanas"
   },
   {
-    title: "Acceleration",
-    subtitle: "Phase 04",
-    desc: "Launching and scaling your brand into the digital frontier. We don't just launch; we ignite your growth engine.",
+    title: "Aceleración",
+    subtitle: "Fase 04",
+    desc: "Lanzamos y escalamos tu marca hacia la frontera digital. No solo lanzamos; encendemos tu motor de crecimiento.",
     icon: <Rocket className="w-7 h-7" />,
     color: "from-pink/30 to-pink/5",
     accent: "bg-pink",
-    details: ["Market Entry", "Performance Monitoring", "Continuous Scale"],
+    details: ["Entrada al Mercado", "Monitoreo de Rendimiento", "Escala Continua"],
     stat: "150%",
-    statLabel: "Avg Growth",
-    duration: "Ongoing"
+    statLabel: "Crecimiento Prom.",
+    duration: "Continuo"
   }
 ];
 
@@ -60,8 +60,12 @@ export default function Process() {
   });
 
   // Adjusted transform to ensure all 5 cards (4 steps + 1 CTA) are visible
-  // -78% is tighter for 5 items to reduce end-of-scroll space
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-78%"]);
+  // -52% provides a more complete finish for the horizontal scroll
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-52%"]);
+  
+  // Fade and scale effect for the final card to "fade into" the white slide
+  const lastCardOpacity = useTransform(scrollYProgress, [0.85, 0.98], [0, 1]);
+  const lastCardScale = useTransform(scrollYProgress, [0.85, 0.98], [0.9, 1]);
 
   return (
     <section id="process" ref={targetRef} className="relative h-[250vh] bg-bg">
@@ -79,15 +83,15 @@ export default function Process() {
             className="flex flex-col md:flex-row md:items-end justify-between gap-8"
           >
             <div className="max-w-3xl">
-              <span className="section-label">Our Methodology</span>
+              <span className="section-label">Nuestra Metodología</span>
               <h2 className="text-5xl md:text-7xl font-black text-white leading-[0.9] tracking-tighter">
-                THE <span className="text-accent">ACCELERATE</span> <br />
-                <span className="text-pink italic">WORKFLOW</span>.
+                EL FLUJO DE <span className="text-accent">ACELERACIÓN</span> <br />
+                <span className="text-pink italic">EFICAZ</span>.
               </h2>
             </div>
             <div className="flex items-center gap-6 text-muted group cursor-default mb-2">
               <div className="flex flex-col items-end">
-                <span className="text-[10px] font-black uppercase tracking-[0.4em] mb-2">Explore</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] mb-2">Explorar</span>
                 <div className="w-24 h-1 bg-white/5 rounded-full overflow-hidden">
                   <motion.div 
                     style={{ scaleX: scrollYProgress }}
@@ -107,8 +111,9 @@ export default function Process() {
           </motion.div>
         </div>
 
-        <motion.div style={{ x }} className="flex gap-6 md:gap-8 px-4 sm:px-6 lg:px-16">
-          {steps.map((step, index) => (
+        <div className="max-w-7xl mx-auto w-full overflow-visible">
+          <motion.div style={{ x }} className="flex gap-6 md:gap-8 px-4 sm:px-6 lg:px-16">
+            {steps.map((step, index) => (
             <div
               key={step.title}
               className="relative shrink-0 w-[85vw] md:w-[420px] group"
@@ -150,13 +155,13 @@ export default function Process() {
                 <div className="pt-8 border-t border-white/5 grid grid-cols-2 gap-6">
                   <div>
                     <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.3em] text-muted mb-2">
-                      <Clock className="w-3 h-3" /> Duration
+                      <Clock className="w-3 h-3" /> Duración
                     </div>
                     <p className="text-base font-black text-white tracking-tight">{step.duration}</p>
                   </div>
                   <div>
                     <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.3em] text-muted mb-2">
-                      <Zap className="w-3 h-3" /> Impact
+                      <Zap className="w-3 h-3" /> Impacto
                     </div>
                     <p className="text-base font-black text-accent tracking-tight">{step.stat}</p>
                   </div>
@@ -166,17 +171,21 @@ export default function Process() {
           ))}
           
           {/* Final CTA Card */}
-          <div className="relative shrink-0 w-[85vw] md:w-[420px] group">
+          <motion.div 
+            style={{ opacity: lastCardOpacity, scale: lastCardScale }}
+            className="relative shrink-0 w-[85vw] md:w-[420px] group"
+          >
             <div className="relative h-full bg-white p-10 rounded-[2.5rem] flex flex-col justify-center items-center text-center overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent via-pink to-accent" />
-              <h3 className="text-3xl font-black text-black mb-4 leading-[0.9] tracking-tighter">READY TO <br /> IGNITE?</h3>
-              <p className="text-black/60 mb-8 text-sm font-medium">Let's build something extraordinary together.</p>
+              <h3 className="text-3xl font-black text-black mb-4 leading-[0.9] tracking-tighter">¿LISTO PARA <br /> DESPEGAR?</h3>
+              <p className="text-black/60 mb-8 text-sm font-medium">Construyamos algo extraordinario juntos.</p>
               <button className="w-full py-4 bg-black text-white rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-accent transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
-                Get Started
+                Comenzar
               </button>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
+      </div>
 
         {/* Progress Bar at bottom */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-48 h-0.5 bg-white/5 rounded-full overflow-hidden">

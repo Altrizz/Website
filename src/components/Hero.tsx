@@ -23,14 +23,14 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="section-label">Digital Excellence Agency</span>
+              <span className="section-label">Agencia de Excelencia Digital</span>
               <h1 className="text-massive mb-8">
-                DEFINING THE <br />
-                <span className="text-accent">DIGITAL</span> <span className="text-pink">FRONTIER</span>.
+                DEFINIENDO LA <br />
+                <span className="text-accent">FRONTERA</span> <span className="text-pink">DIGITAL</span>.
               </h1>
               <p className="text-xl text-muted mb-12 leading-relaxed max-w-xl">
-                We blend surgical design precision with advanced AI strategy to accelerate 
-                your brand into the future of the digital economy.
+                Combinamos precisión quirúrgica en diseño con estrategia avanzada de IA para acelerar 
+                tu marca hacia el futuro de la economía digital.
               </p>
               
               <div className="flex flex-wrap gap-6">
@@ -39,7 +39,7 @@ export default function Hero() {
                   whileTap={{ scale: 0.98 }}
                 >
                   <Button className="cta-button btn-glitch">
-                    View Showcase <ArrowRight className="w-4 h-4" />
+                    Ver Portafolio <ArrowRight className="w-4 h-4" />
                   </Button>
                 </motion.div>
                 <motion.div
@@ -47,7 +47,7 @@ export default function Hero() {
                   whileTap={{ scale: 0.98 }}
                 >
                   <Button className="cta-button btn-glitch">
-                    Our Process <Zap className="w-4 h-4" />
+                    Nuestro Proceso <Zap className="w-4 h-4" />
                   </Button>
                 </motion.div>
               </div>
@@ -61,12 +61,12 @@ export default function Hero() {
             >
               <div className="flex flex-col">
                 <p className="text-4xl md:text-5xl font-extrabold text-white tracking-tighter -mb-1">50+</p>
-                <p className="text-[10px] text-muted font-black uppercase tracking-widest">Global Partners</p>
+                <p className="text-[10px] text-muted font-black uppercase tracking-widest">Aliados Globales</p>
               </div>
               <div className="hidden sm:block w-px h-12 bg-white/10" />
               <div className="flex flex-col">
                 <p className="text-4xl md:text-5xl font-extrabold text-white tracking-tighter -mb-1">12</p>
-                <p className="text-[10px] text-muted font-black uppercase tracking-widest">Design Awards</p>
+                <p className="text-[10px] text-muted font-black uppercase tracking-widest">Premios de Diseño</p>
               </div>
             </motion.div>
           </div>
@@ -103,8 +103,8 @@ export default function Hero() {
                 className="absolute -bottom-4 -left-4 md:-bottom-8 md:-left-8 w-28 h-28 md:w-36 md:h-36 bg-pink/20 backdrop-blur-xl border border-white/20 flex items-center justify-center rounded-2xl shadow-2xl"
               >
                 <div className="text-center flex flex-col gap-0.5">
-                  <p className="text-2xl md:text-3xl font-black text-pink leading-none">AI</p>
-                  <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-white/60">Powered</p>
+                  <p className="text-2xl md:text-3xl font-black text-pink leading-none">IA</p>
+                  <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-white/60">Impulsado</p>
                 </div>
               </motion.div>
             </motion.div>
@@ -119,7 +119,7 @@ export default function Hero() {
         transition={{ delay: 2, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
       >
-        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-muted">Scroll</span>
+        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-muted">Desplazar</span>
         <div className="w-px h-12 bg-gradient-to-b from-white/20 to-transparent" />
       </motion.div>
     </section>

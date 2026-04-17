@@ -14,7 +14,7 @@ interface Message {
 export default function AIConsultant() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: "model", text: "Hello! I'm Aura, your AI Agency Consultant. How can I help you grow your business today?" }
+    { role: "model", text: "¡Hola! Soy Aura, tu consultora de agencia de IA. ¿Cómo puedo ayudarte a impulsar tu negocio hoy?" }
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -38,18 +38,18 @@ export default function AIConsultant() {
       const chat = ai.chats.create({
         model: "gemini-3-flash-preview",
         config: {
-          systemInstruction: "You are 'Aura', a high-end digital agency consultant for 'Aura Digital'. You are professional, strategic, and slightly futuristic. Your goal is to help potential clients understand how Aura Digital can help them with AI, digital marketing, and web development. Keep responses concise and insightful.",
+          systemInstruction: "Eres 'Aura', una consultora de agencia digital de alto nivel para 'Aura Digital'. Eres profesional, estratégica y ligeramente futurista. Tu objetivo es ayudar a los clientes potenciales a entender cómo Aura Digital puede ayudarlos con IA, marketing digital y desarrollo web. Mantén las respuestas concisas y perspicaces. RESPONDE SIEMPRE EN ESPAÑOL.",
         },
         history: messages.map(m => ({ role: m.role, parts: [{ text: m.text }] }))
       });
 
       const result = await chat.sendMessage({ message: input });
-      const modelText = result.text || "I'm sorry, I couldn't process that.";
+      const modelText = result.text || "Lo siento, no pude procesar eso.";
       
       setMessages(prev => [...prev, { role: "model", text: modelText }]);
     } catch (error) {
       console.error("Chat error:", error);
-      setMessages(prev => [...prev, { role: "model", text: "I'm having some technical difficulties. Please try again later." }]);
+      setMessages(prev => [...prev, { role: "model", text: "Estoy teniendo algunas dificultades técnicas. Por favor, inténtalo de nuevo más tarde." }]);
     } finally {
       setIsLoading(false);
     }
@@ -78,10 +78,10 @@ export default function AIConsultant() {
                   <Bot className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-sm text-white">Aura Consultant</h3>
+                  <h3 className="font-bold text-sm text-white">Consultora Aura</h3>
                   <div className="flex items-center gap-1.5">
                     <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                    <span className="text-[10px] text-muted font-bold uppercase tracking-wider">Online & Ready</span>
+                    <span className="text-[10px] text-muted font-bold uppercase tracking-wider">En línea y lista</span>
                   </div>
                 </div>
               </div>
@@ -121,7 +121,7 @@ export default function AIConsultant() {
                 <Input 
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask about our services..."
+                  placeholder="Pregunta sobre servicios..."
                   className="rounded-xl border-white/10 bg-white/5 text-white focus-visible:ring-accent h-12"
                 />
                 <Button type="submit" size="icon" className="rounded-xl bg-white text-black hover:bg-accent hover:text-white shrink-0 w-12 h-12 btn-glitch">
