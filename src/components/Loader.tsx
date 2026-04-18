@@ -115,17 +115,18 @@ export default function Loader({ onComplete }: { onComplete: () => void; key?: s
 
             {/* The Animated Cursor */}
             <motion.div
-              initial={{ x: 200, y: 300, opacity: 0 }}
+              initial={{ x: 300, y: 400, opacity: 0, rotate: 15 }}
               animate={{ 
-                x: [200, 0, 0], 
-                y: [300, 0, 0], 
-                opacity: [0, 1, 1],
-                scale: [1, 1, 0.8, 1]
+                x: [300, 80], 
+                y: [400, -15], 
+                opacity: [0, 1, 1, 1],
+                scale: [1, 1, 0.8, 1],
+                rotate: [15, 0]
               }}
               transition={{ 
                 duration: 2.2, 
-                times: [0, 0.6, 0.8, 1],
-                ease: "easeInOut"
+                times: [0, 0.7, 0.85, 1],
+                ease: [0.22, 1, 0.36, 1]
               }}
               onUpdate={(latest) => {
                 if (latest.scale && (latest.scale as number) < 0.9 && !isClicked) {
